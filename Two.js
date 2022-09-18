@@ -1685,14 +1685,14 @@ function RARCompress(Device) {
 
 function CompressUP(LQYUser, LQYPass, Files_Path) {
     if (FindText("正在压缩：")) {
-    } else if (FindText("分享直链")) {
+    } else if (FindText("添加收藏")) {
         return "修改备份昵称"
     } else if (FindText("DataBackup.zip", true)) {
         sleep(3000);
         while (true) {
             if (FindText("正在上传文件") === false) {
                 break;
-            } else if (FindText("分享直链")) {
+            } else if (FindText("添加收藏")) {
                 return "修改备份昵称"
             } else if (FindText("DataBackup.zip", true)) {
             } else if (FindText("继续", true)) {
@@ -1810,7 +1810,7 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
 function ModifyNickName(TimeName) {
     if (FindText(TimeName + ".zip")) {
         return "重置手机"
-    } else if (FindText("分享直链")) {
+    } else if (FindText("添加收藏")) {
         back()
     } else if (FindText("DataBackup")) {
         let a = text("DataBackup").getOneNodeInfo(0);
