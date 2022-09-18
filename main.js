@@ -833,7 +833,6 @@ function DownUninstallLY(URlJSON) {
     }
     sleep(2000);
     return "下载蓝云";
-
 }
 
 function DownUninstallDX(URlJSON) {
@@ -1051,26 +1050,29 @@ function DownUninstallRAR(URlJSON) {
     } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    } else if (FindText(URlJSON.RAR)) {
-        let a = text(URlJSON.RAR).getNodeInfo(0);
-        if (a) {
-            for (let i = 0; i < a.length; i++) {
-                if (a[i].id === "com.android.chrome:id/line_2") {
-                    logd(a[i].text);
-                    a[i].clickEx() || a[i].click()
-                }
-            }
-        }
-    } else if (FindText("搜索或输入网址")) {
-        let a = text("搜索或输入网址").getOneNodeInfo(0);
-        if (a) {
-            if (a.inputText(URlJSON.RAR)) {
-            }
-        }
-    } else {
-        back()
-        sleep(2000);
-        FindText("Chrome", true)
+    }
+        // else if (FindText(URlJSON.RAR)) {
+        //     let a = text(URlJSON.RAR).getNodeInfo(0);
+        //     if (a) {
+        //         for (let i = 0; i < a.length; i++) {
+        //             if (a[i].id === "com.android.chrome:id/line_2") {
+        //                 logd(a[i].text);
+        //                 a[i].clickEx() || a[i].click()
+        //             }
+        //         }
+        //     }
+        // } else if (FindText("搜索或输入网址")) {
+        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
+        //     if (a) {
+        //         if (a.inputText(URlJSON.RAR)) {
+        //         }
+        //     }
+    // }
+    else {
+        // back()
+        // sleep(2000);
+        // FindText("Chrome", true)
+        openUrl(URlJSON.RAR)
     }
     sleep(2000);
     return "下载RAR";
