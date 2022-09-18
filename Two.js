@@ -1955,6 +1955,7 @@ function WorkAuto() {
         } else if (Task === "压缩") {
             // Task = RARCompress(Device)
             Task = Compress(TimeName)
+            sleep(1000)
         } else if (Task === "上传") {
             Task = CompressUP(LQYUser, LQYPass, Files_Path)
         } else if (Task === "修改备份昵称") {
