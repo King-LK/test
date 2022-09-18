@@ -403,15 +403,13 @@ function BFSHS(TemWork) {
             if (FindText("数据备份") === false && FindDesc("数据备份") === false) {
                 return "下载应用备份"
             }
-        }
-            // else if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
-            //     swipeToPoint(200, 1500, 300, 50, 600)
-            //     sleep(1000);
-            //     if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
-            //         return "下载RAR"
-            //     }
-        // }
-        else if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
+        } else if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
+            swipeToPoint(200, 1500, 300, 50, 600)
+            sleep(1000);
+            if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
+                return "下载RAR"
+            }
+        } else if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
             swipeToPoint(200, 1500, 300, 50, 600)
             sleep(1000);
             if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
