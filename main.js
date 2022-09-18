@@ -1902,7 +1902,7 @@ function WorkAuto() {
     let LQYPass = "qwe123456"
     let Files_Path = "a1"
     let TimeName = 0
-    let PKGNames = "com.csdsaxc"
+    let PKGNames = "com.rgxsq"
 
     while (true) {
         if (Task === "设置语言") {
