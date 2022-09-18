@@ -1898,8 +1898,8 @@ function WorkAuto() {
     let Task = "设置语言"
     let JSONS = {}
     let TemWork = ""
-    let DJSUser = "..880820"
-    let DJSPass = "..880820"
+    let DJSUser = "l880820"
+    let DJSPass = "l880820"
     let LQYUser = "15827328375"
     let LQYPass = "qwe123456"
     let Files_Path = "a1"
