@@ -1,4 +1,3 @@
-
 /**
  * 常用JS变量:
  * agentEvent = 代理模式下自动点击模块
@@ -1437,6 +1436,8 @@ function ChangeNumber() {
             }
         }
     } else if (FindText("下一步", true)) {
+    } else {
+        utils.openApp("com.xingin.xhs")
     }
     return "填资料"
 }
@@ -1974,14 +1975,14 @@ function WorkAuto() {
 //     exit();
 // }
 
-for (let i = 0; i < 10; i++) {
-    if (FindText("允许", true)) {
-    } else if (FindText("立即开始", true)) {
-    } else {
-        toast("等待时间" + i + "/10");
-    }
-    sleep(2000);
-}
+// for (let i = 0; i < 10; i++) {
+//     if (FindText("允许", true)) {
+//     } else if (FindText("立即开始", true)) {
+//     } else {
+//         toast("等待时间" + i + "/10");
+//     }
+//     sleep(2000);
+// }
 
 main();
 
