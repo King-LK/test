@@ -126,15 +126,20 @@ function CloseApp(SetName, AppName, PkgName) {
     return "关闭APP"
 }
 
-function UninstallThisSoftware(PkgName) {
+function UninstallThisSoftware() {
     if (FindText("确定", true)) {
     } else if (FindText("卸载", true)) {
-    } else {
-        OpenSet(PkgName)
+    } else if (FindText("一键授权")) {
+        home()
+    } else if (FindText("应用信息", true)) {
+    } else if (FindText("热更新授权")) {
+        let a = text("热更新授权").getOneNodeInfo(0);
+        if (a) {
+            a.longClick()
+        }
     }
     return "卸载软件"
 }
-
 
 function FindText(str, tap, inp, time, strText) {
     let a = text(str).getOneNodeInfo(0)
@@ -1190,7 +1195,7 @@ function LoginDJS(User, Pass) {
 
         }
     } else if (FindText("独角兽", true) || FindDesc("独角兽", true)) {
-    } else if (FindText("手机号登录")) {
+    } else {
         utils.openApp("com.cm.unicorn")
     }
     return "独角兽授权"
@@ -1241,13 +1246,13 @@ function LoginDX(User, Pass) {
 
         }
     } else if (FindText("独角兽", true) || FindDesc("独角兽", true)) {
-    } else if (FindText("手机号登录")) {
+    } else {
         utils.openApp("com.cm.elephant")
     }
     return "大象授权"
 }
 
-function LoginHD() {
+function LoginHD(User, Pass) {
     if (FindText("通道2", true)) {
         for (let i = 0; i < 10; i++) {
             i++
@@ -1318,12 +1323,12 @@ function LoginHD() {
     } else if (FindText("登陆")) {
         let a = id("cn.erkaisi.hongdou:id/user_edit").getOneNodeInfo(0)
         if (a) {
-            // if (a.inputText("16607529590")) {
-            if (a.inputText("..880820")) {
+            // if (a.inputText("16607529590")) {User,Pass
+            if (a.inputText(User)) {
                 let b = id("cn.erkaisi.hongdou:id/pass_edit").getOneNodeInfo(0);
                 if (b) {
                     // if (b.inputText("666888")) {
-                    if (b.inputText("..880820")) {
+                    if (b.inputText(Pass)) {
                         if (FindText("登陆", true)) {
                             sleep(8000);
                         }
@@ -1333,7 +1338,7 @@ function LoginHD() {
 
         }
     } else if (FindText("红豆", true) || FindDesc("红豆", true)) {
-    } else if (FindText("手机号登录")) {
+    } else {
         utils.openApp("cn.erkaisi.hongdou")
     }
     return "红豆授权"
@@ -1975,7 +1980,7 @@ function WorkAuto() {
         } else if (Task === "独角兽授权") {
             Task = LoginDJS(DJSUser, DJSPass)
         } else if (Task === "红豆授权") {
-            Task = LoginHD()
+            Task = LoginHD(DJSUser, DJSPass)
         } else if (Task === "大象授权") {
             Task = LoginDX(DJSUser, DJSPass)
         } else if (Task === "填资料") {
