@@ -1686,14 +1686,14 @@ function RARCompress(Device) {
 function CompressUP(LQYUser, LQYPass, Files_Path) {
     if (FindText("正在压缩：")) {
     } else if (FindText("分享直链")) {
-        return "修改备份昵称"
+        return "重置手机"
     } else if (FindText("DataBackup.zip", true)) {
         sleep(3000);
         while (true) {
             if (FindText("正在上传文件") === false) {
                 break;
             } else if (FindText("分享直链")) {
-                return "修改备份昵称"
+                return "重置手机"
             } else if (FindText("DataBackup.zip", true)) {
             } else if (FindText("继续", true)) {
                 sleep(3000);
@@ -1951,11 +1951,12 @@ function WorkAuto() {
             Task = OpenMJ()
         } else if (Task === "备份") {
             Task = Backups()
+            TimeName = time()
         } else if (Task === "压缩") {
-            Task = RARCompress(Device)
+            // Task = RARCompress(Device)
+            Task = Compress(TimeName)
         } else if (Task === "上传") {
             Task = CompressUP(LQYUser, LQYPass, Files_Path)
-            TimeName = time()
         } else if (Task === "修改备份昵称") {
             Task = ModifyNickName(TimeName)
         } else if (Task === "重置手机") {
