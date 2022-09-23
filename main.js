@@ -456,7 +456,7 @@ function DownUninstallDJS(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("独角兽.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("独角兽.apk")) {
+    } else if (FindTextEX("独角兽.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -528,7 +528,7 @@ function DownUninstallMJ(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("面具.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("面具.apk")) {
+    } else if (FindTextEX("面具.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -610,7 +610,7 @@ function DownUninstallXHS(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("小红书.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("小红书.apk")) {
+    } else if (FindTextEX("小红书.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -697,7 +697,7 @@ function DownUninstallHD(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("红豆.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("红豆.apk")) {
+    } else if (FindTextEX("红豆.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -778,7 +778,7 @@ function DownUninstallLY(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("蓝云.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("蓝云.apk")) {
+    } else if (FindTextEX("蓝云.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -859,7 +859,7 @@ function DownUninstallDX(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("大象.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("大象.apk")) {
+    } else if (FindTextEX("大象.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -940,7 +940,7 @@ function DownUninstallYYBF(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("备份还原.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("备份还原.apk")) {
+    } else if (FindTextEX("备份还原.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
@@ -1021,7 +1021,7 @@ function DownUninstallRAR(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("压缩.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindText("压缩.apk")) {
+    } else if (FindTextEX("压缩.apk")) {
         FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
