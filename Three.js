@@ -436,7 +436,14 @@ function BFSHS(TemWork) {
 }
 
 function DownUninstallDJS(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -471,13 +478,6 @@ function DownUninstallDJS(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -517,7 +517,14 @@ function DownUninstallDJS(URlJSON) {
 }
 
 function DownUninstallMJ(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -543,13 +550,6 @@ function DownUninstallMJ(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -590,7 +590,14 @@ function DownUninstallMJ(URlJSON) {
 }
 
 function DownUninstallXHS(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -625,13 +632,6 @@ function DownUninstallXHS(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -677,7 +677,14 @@ function DownUninstallXHS(URlJSON) {
 }
 
 function DownUninstallHD(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -712,13 +719,6 @@ function DownUninstallHD(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -758,7 +758,14 @@ function DownUninstallHD(URlJSON) {
 }
 
 function DownUninstallLY(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -793,13 +800,6 @@ function DownUninstallLY(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -839,7 +839,14 @@ function DownUninstallLY(URlJSON) {
 }
 
 function DownUninstallDX(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -874,13 +881,6 @@ function DownUninstallDX(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -920,7 +920,14 @@ function DownUninstallDX(URlJSON) {
 }
 
 function DownUninstallYYBF(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -955,13 +962,6 @@ function DownUninstallYYBF(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -1001,7 +1001,14 @@ function DownUninstallYYBF(URlJSON) {
 }
 
 function DownUninstallRAR(URlJSON) {
-    if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -1036,13 +1043,6 @@ function DownUninstallRAR(URlJSON) {
                 back()
             }
         }
-    } else if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
