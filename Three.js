@@ -2237,12 +2237,12 @@ function WorkAuto() {
 
     while (true) {
         if (Task === "获取文件夹名") {
-            Files_Path = GetFileSName()
+            Files_Path = GetFileSName(Device)
             if (Files_Path !== "") {
                 Task = "获取文件名"
             }
         } else if (Task === "获取文件名") {
-            File_Path = GetFileName()
+            File_Path = GetFileName(Device)
             if (Files_Path !== "") {
                 Task = "设置语言"
             }
