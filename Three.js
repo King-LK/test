@@ -424,9 +424,9 @@ function BFSHS(TemWork) {
             if (FindText("蓝云") === false && FindDesc("蓝云") === false) {
                 return "下载蓝云"
             }
-        } else if (FindText("Magisk") && FindText("小红书") && FindText(TemWork)) {
+        } else if (FindText("Magisk") && FindText("小红书") && FindText("数据备份") && FindText("蓝云")) {
             return "打开小红书"
-        } else if (FindDesc("Magisk") && FindDesc("小红书") && FindDesc(TemWork)) {
+        } else if (FindDesc("Magisk") && FindDesc("小红书") && FindDesc("数据备份") && FindDesc("蓝云")) {
             return "打开小红书"
         }
     } else {
