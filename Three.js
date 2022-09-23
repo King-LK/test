@@ -66,7 +66,7 @@ function randomNum(minNum, maxNum) {
     }
 }
 
-function RndSwipt() {
+function RndSwiptUP() {
     let x1 = randomNum(Math.round(w / 2) - 10, Math.round(w / 2) + 10)
     let y1 = randomNum(Math.round(h / 1.2) - 10, Math.round(h / 1.2) + 10)
     let x2 = randomNum(Math.round(w / 3) - 10, Math.round(w / 3) + 10)
@@ -369,7 +369,7 @@ function SetZN() {
     } else if (FindId("com.android.settings:id/settings_homepage_container")) {
         if (FindText("System", true)) {
         } else {
-            RndSwipt()
+            RndSwiptUP()
         }
     } else if (FindText("Settings", true)) {
     } else if (FindText("设置")) {
@@ -1547,7 +1547,7 @@ function Give_Up() {
                     } else if (FindText("标记") && FindText("商品")) {
                         back()
                     }
-                    RndSwipt()
+                    RndSwiptUP()
                     index++
                     toast("浏览时长:" + index + "/" + RndN)
                     sleep(2000)
@@ -1968,7 +1968,7 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
 
 function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
     if (FindText("打开")) {
-
+        return "解压"
     } else if (FindTextEX("正在下载")) {
     } else if (FindDesc("使用浏览器打开")) {
         let a = desc("使用浏览器打开").getOneNodeInfo(0);
@@ -2150,26 +2150,103 @@ function ResetPhone() {
     return "重置手机"
 }
 
+function GetFileSName(imie) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/heart";
+    let pa = {
+        "imie": imie
+    }
+    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
+    let json = JSON.parse(x)
+    if (json) {
+        if (json.code === 200) {
+            return json.data
+        } else if (json.code === 50) {
+            toast(json.message);
+            sleep(2000);
+        } else {
+            toast(x);
+            sleep(2000);
+        }
+    }
+    return ""
+}
+
+function UPFileName(imie, name) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/bakname";
+    let pa = {
+        "imie": imie,
+        "name": name
+    }
+    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
+    let json = JSON.parse(x)
+    if (json) {
+        if ((json.code === 200)) {
+            toast(json.message)
+            sleep(2000)
+            return json.message
+        } else if (json.code === 50) {
+            toast(json.message)
+            sleep(2000);
+        } else {
+            toast(x);
+            sleep(2000);
+        }
+    }
+    return ""
+}
+
+function GetFileName(imie) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/getbak";
+    let pa = {
+        "imie": imie,
+    }
+    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
+    let json = JSON.parse(x)
+    if (json) {
+        if ((json.code === 200)) {
+            toast(json.data.bakname)
+            sleep(2000)
+            return json.data.bakname
+        } else if (json.code === 50) {
+            toast(json.message)
+            sleep(2000);
+        } else {
+            toast(x);
+            sleep(2000);
+        }
+    }
+    return ""
+}
+
 function WorkAuto() {
-    let Device = device.tcDeviceId() + time()
+    let Device = device.tcDeviceId() + ""
     let SetName = "com.android.settings"
     let AppName = "小红书"
     let PKGName = "com.xingin.xhs"
-    let Task = "设置语言"
+    let Task = "获取文件夹名"
     let JSONS = {}
     let TemWork = ""
     let DJSUser = "l880820"
     let DJSPass = "l880820"
     let LQYUser = "15827328375"
     let LQYPass = "qwe123456"
-    let Files_Path = "a1"
+    let Files_Path = ""
     let File_Path = ""
     let TimeName = 0
     let PKGNames = "com.rgxsq"
-    let FileName = "1663595818481.zip"
 
     while (true) {
-        if (Task === "设置语言") {
+        if (Task === "获取文件夹名") {
+            Files_Path = GetFileSName()
+            if (Files_Path !== "") {
+                Task = "获取文件名"
+            }
+        } else if (Task === "获取文件名") {
+            File_Path = GetFileName()
+            if (Files_Path !== "") {
+                Task = "设置语言"
+            }
+        } else if (Task === "设置语言") {
             Task = SetZN()
         } else if (Task === "获取下载链接") {
             JSONS = RegExUrl()
@@ -2188,7 +2265,7 @@ function WorkAuto() {
         } else if (Task === "判断APP下载") {
             Task = BFSHS(TemWork)
             if (Task === "打开小红书") {
-                Task = "解压"
+                Task = "蓝云下载"
                 // if (JSONS.独角兽) {
                 //     Task = "独角兽授权"
                 // } else if (JSONS.红豆) {
@@ -2266,7 +2343,7 @@ function WorkAuto() {
         } else if (Task === "蓝云下载") {
             Task = CompressDown(LQYUser, LQYPass, Files_Path, File_Path)
         } else if (Task === "解压") {
-            if (Decompression(FileName)) {
+            if (Decompression(File_Path)) {
                 Task = "还原备份"
             }
         } else if (Task === "还原备份") {
