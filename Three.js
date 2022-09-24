@@ -1992,7 +1992,7 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
 }
 
 function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
-    if (FindText("打开")) {
+    if (FindTextEX("打开")) {
         return "解压"
     } else if (FindTextEX("正在下载")) {
     } else if (FindDesc("使用浏览器打开")) {
