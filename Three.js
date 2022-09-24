@@ -1765,9 +1765,7 @@ function Reduction() {
         }
     } else if (FindText("恢复")) {
         if (FindText("选择应用", true)) {
-
         } else if (FindText("恢复", true)) {
-
         }
     } else if (FindText("数据")) {
         let a = text("应用").getOneNodeInfo(0);
@@ -1788,30 +1786,33 @@ function Reduction() {
                                 if (e) {
                                     let f = e.nextSiblings()
                                     if (f) {
-                                        let g = f[0].child(1)
+                                        let g = f[0].allChildren()
                                         if (g) {
-                                            if (g.clickEx() || g.click()) {
-                                                back();
-                                                sleep(3000);
-                                                while (true) {
-                                                    if (FindText("数据")) {
-                                                        let h = text("数据").getOneNodeInfo(0);
-                                                        if (h) {
-                                                            let k = h.previousSiblings()
-                                                            if (k) {
-                                                                if (Number(k[0].text) === 1) {
-                                                                    if (FindText("开始备份", true)) {
-                                                                        sleep(3000);
+                                            let g1 = g[g.length - 1]
+                                            if (g1) {
+                                                if (g1.clickEx() || g1.click()) {
+                                                    back();
+                                                    sleep(3000);
+                                                    while (true) {
+                                                        if (FindText("数据")) {
+                                                            let h = text("数据").getOneNodeInfo(0);
+                                                            if (h) {
+                                                                let k = h.previousSiblings()
+                                                                if (k) {
+                                                                    if (Number(k[0].text) === 1) {
+                                                                        if (FindText("开始恢复", true)) {
+                                                                            sleep(3000);
+                                                                        }
+                                                                    } else {
+                                                                        break;
                                                                     }
-                                                                } else {
-                                                                    break;
                                                                 }
                                                             }
+                                                        } else if (FindText("准备就绪")) {
+                                                            break;
                                                         }
-                                                    } else if (FindText("准备就绪")) {
-                                                        break;
+                                                        sleep(2000);
                                                     }
-                                                    sleep(2000);
                                                 }
                                             }
                                         }
