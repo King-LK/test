@@ -2202,7 +2202,7 @@ function GetFileSName(imie) {
     let json = JSON.parse(x)
     if (json) {
         if (json.code === 200) {
-            return json.data
+            return json.data.name
         } else if (json.code === 50) {
             toast(json.message);
             sleep(2000);
