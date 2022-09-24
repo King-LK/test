@@ -2125,6 +2125,8 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
                 }
             }
         }
+    } else if (FindText("Download")) {
+        home()
     } else {
         let a = text("已授予").getNodeInfo(0);
         if (a) {
