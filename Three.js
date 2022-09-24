@@ -2303,6 +2303,9 @@ function WorkAuto() {
         } else if (Task === "获取文件名") {
             File_Path = GetFileName(Device)
             if (Files_Path !== "") {
+                if (Files_Path.indexOf(".zip")) {
+                    Files_Path = Files_Path + ".zip"
+                }
                 toast("文件名:" + Files_Path);
                 sleep(2000);
                 Task = "获取下载链接"
