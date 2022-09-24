@@ -2289,16 +2289,22 @@ function WorkAuto() {
             if (Task !== "获取IMEI") {
                 home()
                 Device = Task
+                toast("IMEI:" + Device);
+                sleep(2000);
                 Task = "获取文件夹名"
             }
         } else if (Task === "获取文件夹名") {
             Files_Path = GetFileSName(Device)
             if (Files_Path !== "") {
+                toast("文件夹名:" + Files_Path);
+                sleep(2000);
                 Task = "获取文件名"
             }
         } else if (Task === "获取文件名") {
             File_Path = GetFileName(Device)
             if (Files_Path !== "") {
+                toast("文件名:" + Files_Path);
+                sleep(2000);
                 Task = "获取下载链接"
             }
         } else if (Task === "获取下载链接") {
@@ -2416,6 +2422,5 @@ function WorkAuto() {
 }
 
 main();
-
 
 
