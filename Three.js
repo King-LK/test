@@ -2285,6 +2285,7 @@ function WorkAuto() {
         } else if (Task === "获取IMEI") {
             Task = GetIMEI()
             if (Task !== "获取IMEI") {
+                home()
                 Device = Task
                 Task = "获取文件夹名"
             }
