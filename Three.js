@@ -2264,7 +2264,7 @@ function WorkAuto() {
     let SetName = "com.android.settings"
     let AppName = "小红书"
     let PKGName = "com.xingin.xhs"
-    let Task = "获取文件夹名"
+    let Task = "设置语言"
     let JSONS = {}
     let TemWork = ""
     let DJSUser = "l880820"
