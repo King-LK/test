@@ -26,6 +26,7 @@ ClickNumber = 0
 NameList = []
 Small = 3
 Max = 5
+CloseBool = true
 
 function main() {
     toast("开始执行脚本...");
@@ -1803,7 +1804,6 @@ function Reduction() {
     return "还原备份"
 }
 
-
 function Compress(Device) {
     let re = utils.zip("/sdcard/000/" + Device + ".zip", null, ["/sdcard/DataBackup/"]);
     return !!re;
@@ -2005,6 +2005,7 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
     } else if (FindText("网页登录", true)) {
     } else if (FindText("其他登录方式", true)) {
     } else if (FindText("关闭应用", true)) {
+        CloseBool = false
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -2086,6 +2087,19 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
             }
         }
     } else if (FindText("刷新", true)) {
+    } else if (FindText("Chrome")) {
+        let a = text("Chrome").getOneNodeInfo(0);
+        if (a) {
+            let b = a.parent()
+            if (b) {
+                let c = b.parent()
+                if (c) {
+                    if (c.clickEx() || c.click()) {
+                        FindText("始终", true)
+                    }
+                }
+            }
+        }
     } else {
         let a = text("已授予").getNodeInfo(0);
         if (a) {
@@ -2096,7 +2110,9 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
                 }
             }
         } else {
-            back()
+            if (CloseBool === true) {
+                back()
+            }
             utils.openApp("com.tooyoung.lanzou")
             sleep(3000);
         }
