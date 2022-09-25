@@ -1875,6 +1875,9 @@ function ResetPhone() {
             a.inputText("清除所有数据（恢复出厂设置）")
         }
     } else if (FindText("设置", true)) {
+    } else if (FindText("重置选项", true)) {
+    } else if (FindText("高级", true)) {
+    } else if (FindText("系统", true)) {
     } else {
         utils.openApp("com.android.settings")
         sleep(3000);
