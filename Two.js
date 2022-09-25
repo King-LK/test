@@ -369,6 +369,31 @@ function SetZN() {
     return "设置语言"
 }
 
+function GetIMEI() {
+    if (FindText("IMEI")) {
+        let a = text("IMEI").getOneNodeInfo(0);
+        if (a) {
+            let b = a.nextSiblings()
+            if (b) {
+                return b[0].text
+            }
+        }
+    } else if (FindText("关于手机", true)) {
+    } else if (FindText("搜索设置")) {
+        for (let i = 0; i < 5; i++) {
+            RndSwiptUP()
+            sleep(800)
+        }
+    } else if (FindText("设置", true)) {
+    } else {
+        back();
+        sleep(2000);
+        swipeToPoint(200, 1500, 300, 50, 1200)
+        sleep(3000);
+    }
+    return "获取IMEI"
+}
+
 function BFSHS(TemWork) {
     if (FindText("  搜索应用") || FindId("com.google.android.apps.nexuslauncher:id/apps_divider_view")) {
         if (FindText("Magisk") === false && FindDesc("Magisk") === false) {
