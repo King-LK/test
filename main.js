@@ -1920,7 +1920,10 @@ function WorkAuto() {
         } else if (Task === "获取IMEI") {
             Task = GetIMEI()
             if (Task !== "获取IMEI") {
+                home()
                 Device = Task
+                toast("IMEI:" + Device);
+                sleep(2000);
                 Task = "获取下载链接"
             }
         } else if (Task === "获取下载链接") {
