@@ -1993,7 +1993,21 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
 }
 
 function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
-    if (FindTextEX("打开")) {
+    if (FindText("Chrome")) {
+        let a = text("Chrome").getOneNodeInfo(0);
+        if (a) {
+            let b = a.parent()
+            if (b) {
+                let c = b.parent()
+                if (c) {
+                    if (c.clickEx() || c.click()) {
+                        sleep(1000);
+                        FindText("始终", true)
+                    }
+                }
+            }
+        }
+    } else if (FindTextEX(".*打开")) {
         return "解压"
     } else if (FindTextEX("正在下载")) {
     } else if (FindDesc("使用浏览器打开")) {
@@ -2113,19 +2127,6 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
             }
         }
     } else if (FindText("刷新", true)) {
-    } else if (FindText("Chrome")) {
-        let a = text("Chrome").getOneNodeInfo(0);
-        if (a) {
-            let b = a.parent()
-            if (b) {
-                let c = b.parent()
-                if (c) {
-                    if (c.clickEx() || c.click()) {
-                        FindText("始终", true)
-                    }
-                }
-            }
-        }
     } else if (FindText("Download")) {
         home()
     } else {
