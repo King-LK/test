@@ -67,7 +67,7 @@ function randomNum(minNum, maxNum) {
     }
 }
 
-function RndSwipt() {
+function RndSwiptUP() {
     let x1 = randomNum(Math.round(w / 2) - 10, Math.round(w / 2) + 10)
     let y1 = randomNum(Math.round(h / 1.2) - 10, Math.round(h / 1.2) + 10)
     let x2 = randomNum(Math.round(w / 3) - 10, Math.round(w / 3) + 10)
