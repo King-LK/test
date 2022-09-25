@@ -457,89 +457,6 @@ function BFSHS(TemWork) {
     return "判断APP下载"
 }
 
-function DownUninstallDJS(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
-    } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
-        back()
-    } else if (FindText("给5星")) {
-        FindId("com.mmbox.xbrowser:id/btn_close", true)
-    } else if (FindDesc("下载管理程序通知：独角兽.apk")) {
-        if (swipeToPoint(200, 20, 300, 800, 1200)) {
-            sleep(3000);
-            FindText("独角兽.apk", true)
-        }
-    } else if (FindText("确定", true)) {
-        // while (true) {
-        //     if (FindText("下载列表")) {
-        //         break
-        //     } else if (FindText("下载", true)) {
-        //     } else if (FindId("com.mmbox.xbrowser:id/toolbar_btn_menu", true)) {
-        //     } else if (FindText("确定", true)) {
-        //     }
-        //     sleep(2000);
-        // }
-    } else if (FindText("下载列表")) {
-        FindText("独角兽.apk", true)
-    } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("独角兽.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
-    } else if (FindId("android:id/switch_widget")) {
-        let a = id("android:id/switch_widget").getOneNodeInfo(0);
-        if (a) {
-            if (a.checked === false) {
-                a.clickEx() || a.click()
-            } else {
-                back()
-            }
-        }
-    } else if (FindText("Chrome", true)) {
-        sleep(3000);
-        if (FindText("始终", true)) {
-        }
-    } else if (FindText("始终", true)) {
-    } else if (FindText("允许", true)) {
-    } else if (FindText("验证并下载", true)) {
-    } else if (FindText("下载", true)) {
-    } else if (FindText("设置", true)) {
-    } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.独角兽)) {
-        //     let a = text(URlJSON.独角兽).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.独角兽)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.独角兽)
-    }
-    sleep(2000);
-    return "下载独角兽";
-}
-
 function DownUninstallMJ(URlJSON) {
     if (FindText("完成", true)) {
         toast("返回桌面");
@@ -1941,7 +1858,7 @@ function GetUserPass(imie) {
     let json = JSON.parse(x)
     if (json) {
         if (json.code === 200) {
-            return json.data.username
+            return json.data
         } else if (json.code === 50) {
             toast(json.message);
             sleep(2000);
@@ -1953,9 +1870,31 @@ function GetUserPass(imie) {
     return ""
 }
 
+function UPUserState(imie, ID) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/incAccount";
+    let pa = {
+        "imie": imie,
+        "id": ID
+    }
+    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
+    let json = JSON.parse(x)
+    if (json) {
+        if (json.code === 200) {
+            return true
+        } else if (json.code === 50) {
+            toast(json.message);
+            sleep(2000);
+        } else {
+            toast(x);
+            sleep(2000);
+        }
+    }
+    return false
+}
+
 
 function WorkAuto() {
-    let Device = device.tcDeviceId() + time()
+    let Device = ""
     let SetName = "com.android.settings"
     let AppName = "小红书"
     let PKGName = "com.xingin.xhs"
@@ -1970,6 +1909,7 @@ function WorkAuto() {
     let TimeName = 0
     let PKGNames = "com.rgxsq"
     let TemList = []
+    let ID = ""
 
     while (true) {
         if (Task === "设置语言") {
@@ -1981,20 +1921,7 @@ function WorkAuto() {
             Task = GetIMEI()
             if (Task !== "获取IMEI") {
                 Device = Task
-                Task = "获取账号密码"
-            }
-        } else if (Task === "获取账号密码") {
-            Files_Path = GetUserPass(Device)
-            if (Files_Path !== "") {
-                TemList = Files_Path.split("----")
-                if (TemList.length > 1) {
-                    DJSUser = TemList[0]
-                    DJSPass = TemList[1]
-                    Task = "获取下载链接"
-                } else {
-                    toast(Files_Path);
-                    sleep(2000);
-                }
+                Task = "获取下载链接"
             }
         } else if (Task === "获取下载链接") {
             JSONS = RegExUrl()
@@ -2014,11 +1941,11 @@ function WorkAuto() {
             Task = BFSHS(TemWork)
             if (Task === "打开小红书") {
                 if (JSONS.独角兽) {
-                    Task = "独角兽授权"
+                    Task = "获取账号密码"
                 } else if (JSONS.红豆) {
-                    Task = "红豆授权"
+                    Task = "获取账号密码"
                 } else if (JSONS.大象) {
-                    Task = "大象授权"
+                    Task = "获取账号密码"
                 }
             }
         } else if (Task === "下载面具") {
@@ -2057,19 +1984,51 @@ function WorkAuto() {
             Task = OpenXHS(TemWork)
             if (Task === TemWork) {
                 if (TemWork === "独角兽") {
-                    Task = "独角兽授权"
+                    Task = "获取账号密码"
                 } else if (TemWork === "红豆授权") {
-                    Task = "红豆授权"
+                    Task = "获取账号密码"
                 } else if (TemWork === "大象平台") {
-                    Task = "大象授权"
+                    Task = "获取账号密码"
                 }
+            }
+        } else if (Task === "获取账号密码") {
+            Task = GetUserPass(Device)
+            if (Task && Task !== "") {
+                TemList = Task.username.split("----")
+                if (TemList.length > 1) {
+                    ID = Task.id
+                    DJSUser = TemList[0]
+                    DJSPass = TemList[1]
+                    if (TemWork === "独角兽") {
+                        Task = "独角兽授权"
+                    } else if (TemWork === "红豆授权") {
+                        Task = "红豆授权"
+                    } else if (TemWork === "大象平台") {
+                        Task = "大象授权"
+                    }
+                } else {
+                    toast(Task);
+                    Task = "获取账号密码"
+                    sleep(2000);
+                }
+            } else {
+                Task = "获取账号密码"
             }
         } else if (Task === "独角兽授权") {
             Task = LoginDJS(DJSUser, DJSPass)
+            if (Task === "卸载本软") {
+                Task = "上传账号状态"
+            }
         } else if (Task === "红豆授权") {
             Task = LoginHD(DJSUser, DJSPass)
+            if (Task === "卸载本软") {
+                Task = "上传账号状态"
+            }
         } else if (Task === "大象授权") {
             Task = LoginDX(DJSUser, DJSPass)
+            if (Task === "卸载本软") {
+                Task = "上传账号状态"
+            }
         } else if (Task === "填资料") {
             Task = ChangeNumber()
         } else if (Task === "养号") {
@@ -2095,6 +2054,10 @@ function WorkAuto() {
             Task = ModifyNickName(TimeName)
         } else if (Task === "重置手机") {
             Task = ResetPhone()
+        } else if (Task === "上传账号状态") {
+            if (UPUserState(Device, ID)) {
+                Task = "卸载本软"
+            }
         } else if (Task === "卸载本软") {
             UninstallThisSoftware(PKGNames)
         } else if (Task === "停止") {
