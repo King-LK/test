@@ -28,6 +28,7 @@ Small = 3
 Max = 5
 
 function main() {
+    //如果自动化服务正常
     toast("开始执行脚本...");
     sleep(2000);
     WorkAuto()
@@ -124,21 +125,6 @@ function CloseApp(SetName, AppName, PkgName) {
         OpenSet(PkgName)
     }
     return "关闭APP"
-}
-
-function UninstallThisSoftware() {
-    if (FindText("确定", true)) {
-    } else if (FindText("卸载", true)) {
-    } else if (FindText("一键授权")) {
-        home()
-    } else if (FindText("应用信息", true)) {
-    } else if (FindText("热更新授权")) {
-        let a = text("热更新授权").getOneNodeInfo(0);
-        if (a) {
-            a.longClick()
-        }
-    }
-    return "卸载软件"
 }
 
 function FindText(str, tap, inp, time, strText) {
@@ -457,15 +443,86 @@ function BFSHS(TemWork) {
     return "判断APP下载"
 }
 
-function DownUninstallMJ(URlJSON) {
-    if (FindText("完成", true)) {
+function DownUninstallDJS(URlJSON) {
+    if (FindText("下一步") || FindText("正在安装...")) {
+    } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
+        back()
+    } else if (FindText("给5星")) {
+        FindId("com.mmbox.xbrowser:id/btn_close", true)
+    } else if (FindDesc("下载管理程序通知：独角兽.apk")) {
+        if (swipeToPoint(200, 20, 300, 800, 1200)) {
+            sleep(3000);
+            FindText("独角兽.apk", true)
+        }
+    } else if (FindText("确定", true)) {
+        // while (true) {
+        //     if (FindText("下载列表")) {
+        //         break
+        //     } else if (FindText("下载", true)) {
+        //     } else if (FindId("com.mmbox.xbrowser:id/toolbar_btn_menu", true)) {
+        //     } else if (FindText("确定", true)) {
+        //     }
+        //     sleep(2000);
+        // }
+    } else if (FindText("下载列表")) {
+        FindText("独角兽.apk", true)
+    } else if (FindText("安装", true)) {
+    } else if (FindText("独角兽.apk")) {
+        FindId("submit", true)
+    } else if (FindId("android:id/switch_widget")) {
+        let a = id("android:id/switch_widget").getOneNodeInfo(0);
+        if (a) {
+            if (a.checked === false) {
+                a.clickEx() || a.click()
+            } else {
+                back()
+            }
+        }
+    } else if (FindText("完成", true)) {
         toast("返回桌面");
         for (let i = 0; i < 20; i++) {
             back()
             sleep(300);
         }
         return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    } else if (FindText("Chrome", true)) {
+        sleep(3000);
+        if (FindText("始终", true)) {
+        }
+    } else if (FindText("始终", true)) {
+    } else if (FindText("允许", true)) {
+    } else if (FindText("验证并下载", true)) {
+    } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
+    } else if (FindText("设置", true)) {
+    } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
+    } else if (FindText(URlJSON.独角兽)) {
+        let a = text(URlJSON.独角兽).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.独角兽)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
+    }
+    sleep(2000);
+    return "下载独角兽";
+}
+
+function DownUninstallMJ(URlJSON) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -479,11 +536,8 @@ function DownUninstallMJ(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("面具.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("面具.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("面具.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -493,6 +547,13 @@ function DownUninstallMJ(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -501,46 +562,36 @@ function DownUninstallMJ(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.面具)) {
-        //     let a = text(URlJSON.面具).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // }
-        // else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.面具)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.面具)
+    } else if (FindText(URlJSON.面具)) {
+        let a = text(URlJSON.面具).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.面具)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载面具";
 }
 
 function DownUninstallXHS(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -563,11 +614,8 @@ function DownUninstallXHS(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("小红书.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("小红书.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("小红书.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -577,6 +625,13 @@ function DownUninstallXHS(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -585,31 +640,29 @@ function DownUninstallXHS(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.小红书)) {
-        //     let a = text(URlJSON.小红书).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.小红书)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.小红书)
+    } else if (FindText(URlJSON.小红书)) {
+        let a = text(URlJSON.小红书).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.小红书)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载小红书";
@@ -622,14 +675,7 @@ function DownUninstallXHS(URlJSON) {
 }
 
 function DownUninstallHD(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -652,11 +698,8 @@ function DownUninstallHD(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("红豆.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("红豆.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("红豆.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -666,6 +709,13 @@ function DownUninstallHD(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -674,45 +724,36 @@ function DownUninstallHD(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.红豆)) {
-        //     let a = text(URlJSON.红豆).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.红豆)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.红豆)
+    } else if (FindText(URlJSON.红豆)) {
+        let a = text(URlJSON.红豆).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.红豆)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载红豆";
 }
 
 function DownUninstallLY(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -735,11 +776,8 @@ function DownUninstallLY(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("蓝云.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("蓝云.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("蓝云.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -749,6 +787,13 @@ function DownUninstallLY(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -757,45 +802,37 @@ function DownUninstallLY(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.蓝云)) {
-        //     let a = text(URlJSON.蓝云).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.蓝云)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.蓝云)
+    } else if (FindText(URlJSON.蓝云)) {
+        let a = text(URlJSON.蓝云).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.蓝云)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载蓝云";
+
 }
 
 function DownUninstallDX(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -818,11 +855,8 @@ function DownUninstallDX(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("大象.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("大象.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("大象.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -832,6 +866,13 @@ function DownUninstallDX(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -840,45 +881,36 @@ function DownUninstallDX(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.大象)) {
-        //     let a = text(URlJSON.大象).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.大象)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.大象)
+    } else if (FindText(URlJSON.大象)) {
+        let a = text(URlJSON.大象).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.大象)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载大象平台";
 }
 
 function DownUninstallYYBF(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -901,11 +933,8 @@ function DownUninstallYYBF(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("备份还原.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("备份还原.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("备份还原.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -915,6 +944,13 @@ function DownUninstallYYBF(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -923,45 +959,36 @@ function DownUninstallYYBF(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.应用备份)) {
-        //     let a = text(URlJSON.应用备份).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.应用备份)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.应用备份)
+    } else if (FindText(URlJSON.应用备份)) {
+        let a = text(URlJSON.应用备份).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.应用备份)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载应用备份";
 }
 
 function DownUninstallRAR(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
+    if (FindText("下一步") || FindText("正在安装...")) {
     } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
         back()
     } else if (FindText("给5星")) {
@@ -984,11 +1011,8 @@ function DownUninstallRAR(URlJSON) {
     } else if (FindText("下载列表")) {
         FindText("压缩.apk", true)
     } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("压缩.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
+    } else if (FindText("压缩.apk")) {
+        FindId("submit", true)
     } else if (FindId("android:id/switch_widget")) {
         let a = id("android:id/switch_widget").getOneNodeInfo(0);
         if (a) {
@@ -998,6 +1022,13 @@ function DownUninstallRAR(URlJSON) {
                 back()
             }
         }
+    } else if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
     } else if (FindText("Chrome", true)) {
         sleep(3000);
         if (FindText("始终", true)) {
@@ -1006,31 +1037,29 @@ function DownUninstallRAR(URlJSON) {
     } else if (FindText("允许", true)) {
     } else if (FindText("验证并下载", true)) {
     } else if (FindText("下载", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
     } else if (FindText("设置", true)) {
     } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.RAR)) {
-        //     let a = text(URlJSON.RAR).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.RAR)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.RAR)
+    } else if (FindText(URlJSON.RAR)) {
+        let a = text(URlJSON.RAR).getNodeInfo(0);
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                if (a[i].id === "com.android.chrome:id/line_2") {
+                    logd(a[i].text);
+                    a[i].clickEx() || a[i].click()
+                }
+            }
+        }
+    } else if (FindText("搜索或输入网址")) {
+        let a = text("搜索或输入网址").getOneNodeInfo(0);
+        if (a) {
+            if (a.inputText(URlJSON.RAR)) {
+            }
+        }
+    } else {
+        back()
+        sleep(2000);
+        FindText("Chrome", true)
     }
     sleep(2000);
     return "下载RAR";
@@ -1153,24 +1182,23 @@ function LoginDJS(User, Pass) {
 
         }
     } else if (FindText("独角兽", true) || FindDesc("独角兽", true)) {
-    } else {
+    } else if (FindText("手机号登录")) {
         utils.openApp("com.cm.unicorn")
     }
     return "独角兽授权"
 }
 
 function LoginDX(User, Pass) {
-    if (FindText("一键授权")) {
-        return "卸载本软"
-        // for (let i = 0; i < 60; i++) {
-        //     i++
-        //     if (FindText("确定") || FindText("欢迎来到小红书") || FindText("我") || FindText("好久不见，欢迎回来")) {
-        //         return "填资料"
-        //     }
-        //     toast("等待" + i + "/60秒");
-        //     sleep(2000);
-        // }
-        // back()
+    if (FindText("一键授权", true)) {
+        for (let i = 0; i < 60; i++) {
+            i++
+            if (FindText("确定") || FindText("欢迎来到小红书") || FindText("我") || FindText("好久不见，欢迎回来")) {
+                return "填资料"
+            }
+            toast("等待" + i + "/60秒");
+            sleep(2000);
+        }
+        back()
     } else if (FindText("仅在使用该应用时允许", true)) {
         sleep(3000);
     } else if (FindId("com.cm.elephant:id/tabSegment")) {
@@ -1204,13 +1232,13 @@ function LoginDX(User, Pass) {
 
         }
     } else if (FindText("独角兽", true) || FindDesc("独角兽", true)) {
-    } else {
+    } else if (FindText("手机号登录")) {
         utils.openApp("com.cm.elephant")
     }
     return "大象授权"
 }
 
-function LoginHD(User, Pass) {
+function LoginHD() {
     if (FindText("通道2", true)) {
         for (let i = 0; i < 10; i++) {
             i++
@@ -1281,12 +1309,12 @@ function LoginHD(User, Pass) {
     } else if (FindText("登陆")) {
         let a = id("cn.erkaisi.hongdou:id/user_edit").getOneNodeInfo(0)
         if (a) {
-            // if (a.inputText("16607529590")) {User,Pass
-            if (a.inputText(User)) {
+            // if (a.inputText("16607529590")) {
+            if (a.inputText("..880820")) {
                 let b = id("cn.erkaisi.hongdou:id/pass_edit").getOneNodeInfo(0);
                 if (b) {
                     // if (b.inputText("666888")) {
-                    if (b.inputText(Pass)) {
+                    if (b.inputText("..880820")) {
                         if (FindText("登陆", true)) {
                             sleep(8000);
                         }
@@ -1296,7 +1324,7 @@ function LoginHD(User, Pass) {
 
         }
     } else if (FindText("红豆", true) || FindDesc("红豆", true)) {
-    } else {
+    } else if (FindText("手机号登录")) {
         utils.openApp("cn.erkaisi.hongdou")
     }
     return "红豆授权"
@@ -1433,6 +1461,8 @@ function ChangeNumber() {
             }
         }
     } else if (FindText("下一步", true)) {
+    } else {
+        utils.openApp("com.xingin.xhs")
     }
     return "填资料"
 }
@@ -1680,16 +1710,16 @@ function RARCompress(Device) {
 
 function CompressUP(LQYUser, LQYPass, Files_Path) {
     if (FindText("正在压缩：")) {
-    } else if (FindText("分享直链")) {
+    } else if (FindText("添加收藏")) {
         return "修改备份昵称"
     } else if (FindText("DataBackup.zip", true)) {
-        sleep(3000);
+        sleep(15 * 1000);
         while (true) {
-            if (FindText("正在上传文件") === false) {
-                break;
-            } else if (FindText("分享直链")) {
+            if (FindText("正在上传文件")) {
+            } else if (FindText("添加收藏")) {
                 return "修改备份昵称"
             } else if (FindText("DataBackup.zip", true)) {
+                sleep(3000);
             } else if (FindText("继续", true)) {
                 sleep(3000);
             }
@@ -1805,7 +1835,7 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
 function ModifyNickName(TimeName) {
     if (FindText(TimeName + ".zip")) {
         return "重置手机"
-    } else if (FindText("分享直链")) {
+    } else if (FindText("添加收藏")) {
         back()
     } else if (FindText("DataBackup")) {
         let a = text("DataBackup").getOneNodeInfo(0);
@@ -1848,83 +1878,33 @@ function ResetPhone() {
     return "重置手机"
 }
 
-function GetUserPass(imie) {
-    let url = "http://119.3.169.36:82/xiaohongshu/dev/account";
-    let pa = {
-        "imie": imie,
-        "plat": "1"
-    }
-    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
-    let json = JSON.parse(x)
-    if (json) {
-        if (json.code === 200) {
-            return json.data
-        } else if (json.code === 50) {
-            toast(json.message);
-            sleep(2000);
-        } else {
-            toast(x);
-            sleep(2000);
-        }
-    }
-    return ""
-}
-
-function UPUserState(imie, ID) {
-    let url = "http://119.3.169.36:82/xiaohongshu/dev/incAccount";
-    let pa = {
-        "imie": imie,
-        "id": ID
-    }
-    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
-    let json = JSON.parse(x)
-    if (json) {
-        if (json.code === 200) {
-            return true
-        } else if (json.code === 50) {
-            toast(json.message);
-            sleep(2000);
-        } else {
-            toast(x);
-            sleep(2000);
-        }
-    }
-    return false
-}
-
-
 function WorkAuto() {
-    let Device = ""
+    let Device = time() //device.tcDeviceId() + time()
     let SetName = "com.android.settings"
     let AppName = "小红书"
     let PKGName = "com.xingin.xhs"
-    let Task = "设置语言"
+    let Task = "获取IMEI"
     let JSONS = {}
     let TemWork = ""
-    let DJSUser = "l880820"
-    let DJSPass = "l880820"
+    let DJSUser = "..880820"
+    let DJSPass = "..880820"
     let LQYUser = "15827328375"
     let LQYPass = "qwe123456"
     let Files_Path = ""
     let TimeName = 0
-    let PKGNames = "com.rgxsq"
-    let TemList = []
-    let ID = ""
-
     while (true) {
         if (Task === "设置语言") {
             Task = SetZN()
-            if (Task === "获取下载链接") {
-                Task = "获取IMEI"
-            }
         } else if (Task === "获取IMEI") {
             Task = GetIMEI()
             if (Task !== "获取IMEI") {
-                home()
                 Device = Task
-                toast("IMEI:" + Device);
-                sleep(2000);
-                Task = "获取下载链接"
+                Task = "获取文件夹名"
+            }
+        } else if (Task === "获取文件夹名") {
+            Files_Path = GetFileSName(Device)
+            if (Files_Path !== "") {
+                Task = "填资料"
             }
         } else if (Task === "获取下载链接") {
             JSONS = RegExUrl()
@@ -1942,15 +1922,6 @@ function WorkAuto() {
             }
         } else if (Task === "判断APP下载") {
             Task = BFSHS(TemWork)
-            if (Task === "打开小红书") {
-                if (JSONS.独角兽) {
-                    Task = "获取账号密码"
-                } else if (JSONS.红豆) {
-                    Task = "获取账号密码"
-                } else if (JSONS.大象) {
-                    Task = "获取账号密码"
-                }
-            }
         } else if (Task === "下载面具") {
             if (JSONS.面具) {
                 Task = DownUninstallMJ(JSONS)
@@ -1987,51 +1958,19 @@ function WorkAuto() {
             Task = OpenXHS(TemWork)
             if (Task === TemWork) {
                 if (TemWork === "独角兽") {
-                    Task = "获取账号密码"
+                    Task = "独角兽授权"
                 } else if (TemWork === "红豆授权") {
-                    Task = "获取账号密码"
+                    Task = "红豆授权"
                 } else if (TemWork === "大象平台") {
-                    Task = "获取账号密码"
+                    Task = "大象授权"
                 }
-            }
-        } else if (Task === "获取账号密码") {
-            Task = GetUserPass(Device)
-            if (Task && Task !== "") {
-                TemList = Task.username.split("----")
-                if (TemList.length > 1) {
-                    ID = Task.id
-                    DJSUser = TemList[0]
-                    DJSPass = TemList[1]
-                    if (TemWork === "独角兽") {
-                        Task = "独角兽授权"
-                    } else if (TemWork === "红豆授权") {
-                        Task = "红豆授权"
-                    } else if (TemWork === "大象平台") {
-                        Task = "大象授权"
-                    }
-                } else {
-                    toast(Task);
-                    Task = "获取账号密码"
-                    sleep(2000);
-                }
-            } else {
-                Task = "获取账号密码"
             }
         } else if (Task === "独角兽授权") {
             Task = LoginDJS(DJSUser, DJSPass)
-            if (Task === "卸载本软") {
-                Task = "上传账号状态"
-            }
         } else if (Task === "红豆授权") {
-            Task = LoginHD(DJSUser, DJSPass)
-            if (Task === "卸载本软") {
-                Task = "上传账号状态"
-            }
+            Task = LoginHD()
         } else if (Task === "大象授权") {
             Task = LoginDX(DJSUser, DJSPass)
-            if (Task === "卸载本软") {
-                Task = "上传账号状态"
-            }
         } else if (Task === "填资料") {
             Task = ChangeNumber()
         } else if (Task === "养号") {
@@ -2048,21 +1987,16 @@ function WorkAuto() {
             Task = OpenMJ()
         } else if (Task === "备份") {
             Task = Backups()
+            TimeName = time()
         } else if (Task === "压缩") {
             Task = RARCompress(Device)
+            //Task = Compress(TimeName)
         } else if (Task === "上传") {
             Task = CompressUP(LQYUser, LQYPass, Files_Path)
-            TimeName = time()
         } else if (Task === "修改备份昵称") {
             Task = ModifyNickName(TimeName)
         } else if (Task === "重置手机") {
             Task = ResetPhone()
-        } else if (Task === "上传账号状态") {
-            if (UPUserState(Device, ID)) {
-                Task = "卸载本软"
-            }
-        } else if (Task === "卸载本软") {
-            UninstallThisSoftware(PKGNames)
         } else if (Task === "停止") {
             break;
         }
@@ -2072,7 +2006,21 @@ function WorkAuto() {
     exit()
 }
 
-main();
+// if (!autoServiceStart(3)) {
+//     toast("自动化服务启动失败，无法执行脚本")
+//     sleep(2000);
+//     exit();
+// }
 
+// for (let i = 0; i < 10; i++) {
+//     if (FindText("允许", true)) {
+//     } else if (FindText("立即开始", true)) {
+//     } else {
+//         toast("等待时间" + i + "/10");
+//     }
+//     sleep(2000);
+// }
+
+main();
 
 
