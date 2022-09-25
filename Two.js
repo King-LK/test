@@ -1882,6 +1882,27 @@ function ResetPhone() {
     return "重置手机"
 }
 
+function GetFileSName(imie) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/heart";
+    let pa = {
+        "imie": imie
+    }
+    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
+    let json = JSON.parse(x)
+    if (json) {
+        if (json.code === 200) {
+            return json.data.name
+        } else if (json.code === 50) {
+            toast(json.message);
+            sleep(2000);
+        } else {
+            toast(x);
+            sleep(2000);
+        }
+    }
+    return ""
+}
+
 function WorkAuto() {
     let Device = time() //device.tcDeviceId() + time()
     let SetName = "com.android.settings"
@@ -1910,8 +1931,6 @@ function WorkAuto() {
             }
         } else if (Task === "获取文件夹名") {
             Files_Path = GetFileSName(Device)
-            toast(Files_Path);
-            sleep(2000);
             if (Files_Path !== "") {
                 Task = "填资料"
             }
