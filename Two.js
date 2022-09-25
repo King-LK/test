@@ -1728,8 +1728,12 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
     } else if (FindText("Zip", true)) {
     } else if (FindText("内部储存", true)) {
     } else if (FindText("上传文件", true)) {
-    } else if (FindText(Files_Path, true)) {
-        FindDesc("打开或关闭新建菜单", true)
+    } else if (FindText("文件夹")) {
+        if (FindText(Files_Path, true)) {
+            FindDesc("打开或关闭新建菜单", true)
+        } else {
+            RndSwiptUP()
+        }
     } else if (FindText("网页登录", true)) {
     } else if (FindText("其他登录方式", true)) {
     } else if (FindText("关闭应用", true)) {
