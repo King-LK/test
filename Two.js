@@ -1910,6 +1910,8 @@ function WorkAuto() {
             }
         } else if (Task === "获取文件夹名") {
             Files_Path = GetFileSName(Device)
+            toast(Files_Path);
+            sleep(2000);
             if (Files_Path !== "") {
                 Task = "填资料"
             }
