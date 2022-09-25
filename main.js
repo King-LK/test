@@ -26,7 +26,6 @@ ClickNumber = 0
 NameList = []
 Small = 3
 Max = 5
-CloseBool = true
 
 function main() {
     toast("开始执行脚本...");
@@ -67,7 +66,7 @@ function randomNum(minNum, maxNum) {
     }
 }
 
-function RndSwiptUP() {
+function RndSwipt() {
     let x1 = randomNum(Math.round(w / 2) - 10, Math.round(w / 2) + 10)
     let y1 = randomNum(Math.round(h / 1.2) - 10, Math.round(h / 1.2) + 10)
     let x2 = randomNum(Math.round(w / 3) - 10, Math.round(w / 3) + 10)
@@ -370,7 +369,7 @@ function SetZN() {
     } else if (FindId("com.android.settings:id/settings_homepage_container")) {
         if (FindText("System", true)) {
         } else {
-            RndSwiptUP()
+            RndSwipt()
         }
     } else if (FindText("Settings", true)) {
     } else if (FindText("设置")) {
@@ -429,119 +428,33 @@ function BFSHS(TemWork) {
             if (FindText("数据备份") === false && FindDesc("数据备份") === false) {
                 return "下载应用备份"
             }
-        }
-            // else if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
-            //     swipeToPoint(200, 1500, 300, 50, 600)
-            //     sleep(1000);
-            //     if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
-            //         return "下载RAR"
-            //     }
-            // }
-            // else if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
-            //     swipeToPoint(200, 1500, 300, 50, 600)
-            //     sleep(1000);
-            //     if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
-            //         return "下载" + TemWork
-            //     }
-        // }
-        else if (FindText("蓝云") === false && FindDesc("蓝云") === false) {
+        } else if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
+            swipeToPoint(200, 1500, 300, 50, 600)
+            sleep(1000);
+            if (FindText("ZArchiver Pro") === false && FindDesc("ZArchiver Pro") === false) {
+                return "下载RAR"
+            }
+        } else if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
+            swipeToPoint(200, 1500, 300, 50, 600)
+            sleep(1000);
+            if (FindText(TemWork) === false && FindDesc(TemWork) === false) {
+                return "下载" + TemWork
+            }
+        } else if (FindText("蓝云") === false && FindDesc("蓝云") === false) {
             swipeToPoint(200, 1500, 300, 50, 600)
             sleep(1000);
             if (FindText("蓝云") === false && FindDesc("蓝云") === false) {
                 return "下载蓝云"
             }
-        } else if (FindText("Magisk") && FindText("小红书") && FindText("数据备份") && FindText("蓝云")) {
+        } else if (FindText("Magisk") && FindText("小红书") && FindText(TemWork)) {
             return "打开小红书"
-        } else if (FindDesc("Magisk") && FindDesc("小红书") && FindDesc("数据备份") && FindDesc("蓝云")) {
+        } else if (FindDesc("Magisk") && FindDesc("小红书") && FindDesc(TemWork)) {
             return "打开小红书"
         }
     } else {
         swipeToPoint(200, 1500, 300, 50, 1200)
     }
     return "判断APP下载"
-}
-
-function DownUninstallDJS(URlJSON) {
-    if (FindText("完成", true)) {
-        toast("返回桌面");
-        for (let i = 0; i < 20; i++) {
-            back()
-            sleep(300);
-        }
-        return "判断APP下载"
-    } else if (FindText("下一步") || FindText("正在安装...")) {
-    } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
-        back()
-    } else if (FindText("给5星")) {
-        FindId("com.mmbox.xbrowser:id/btn_close", true)
-    } else if (FindDesc("下载管理程序通知：独角兽.apk")) {
-        if (swipeToPoint(200, 20, 300, 800, 1200)) {
-            sleep(3000);
-            FindText("独角兽.apk", true)
-        }
-    } else if (FindText("确定", true)) {
-        // while (true) {
-        //     if (FindText("下载列表")) {
-        //         break
-        //     } else if (FindText("下载", true)) {
-        //     } else if (FindId("com.mmbox.xbrowser:id/toolbar_btn_menu", true)) {
-        //     } else if (FindText("确定", true)) {
-        //     }
-        //     sleep(2000);
-        // }
-    } else if (FindText("下载列表")) {
-        FindText("独角兽.apk", true)
-    } else if (FindText("安装", true)) {
-    } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("独角兽.apk")) {
-        if (FindId("submit", true)) {
-        } else if (FindText("下载", true)) {
-        }
-    } else if (FindId("android:id/switch_widget")) {
-        let a = id("android:id/switch_widget").getOneNodeInfo(0);
-        if (a) {
-            if (a.checked === false) {
-                a.clickEx() || a.click()
-            } else {
-                back()
-            }
-        }
-    } else if (FindText("Chrome", true)) {
-        sleep(3000);
-        if (FindText("始终", true)) {
-        }
-    } else if (FindText("始终", true)) {
-    } else if (FindText("允许", true)) {
-    } else if (FindText("验证并下载", true)) {
-    } else if (FindText("下载", true)) {
-    } else if (FindText("设置", true)) {
-    } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
-    }
-        // else if (FindText(URlJSON.独角兽)) {
-        //     let a = text(URlJSON.独角兽).getNodeInfo(0);
-        //     if (a) {
-        //         for (let i = 0; i < a.length; i++) {
-        //             if (a[i].id === "com.android.chrome:id/line_2") {
-        //                 logd(a[i].text);
-        //                 a[i].clickEx() || a[i].click()
-        //             }
-        //         }
-        //     }
-        // } else if (FindText("搜索或输入网址")) {
-        //     let a = text("搜索或输入网址").getOneNodeInfo(0);
-        //     if (a) {
-        //         if (a.inputText(URlJSON.独角兽)) {
-        //         }
-        //     }
-    // }
-    else {
-        // back()
-        // sleep(2000);
-        // FindText("Chrome", true)
-        openUrl(URlJSON.独角兽)
-    }
-    sleep(2000);
-    return "下载独角兽";
 }
 
 function DownUninstallMJ(URlJSON) {
@@ -1589,7 +1502,7 @@ function Give_Up() {
                     } else if (FindText("标记") && FindText("商品")) {
                         back()
                     }
-                    RndSwiptUP()
+                    RndSwipt()
                     index++
                     toast("浏览时长:" + index + "/" + RndN)
                     sleep(2000)
@@ -1733,132 +1646,13 @@ function Backups() {
     return "备份"
 }
 
-function Reduction() {
-    if (FindText("恢复完成")) {
-        return "停止"
-    } else if (FindText("完成", true)) {
-    } else if (FindText("激活Bashrc环境", true)) {
-    } else if (FindText("释放预编译二进制文件", true)) {
-    } else if (FindText("获取Root权限", true)) {
-        while (true) {
-            if (FindText("释放预编译二进制文件", true)) {
-                sleep(6000);
-                break;
-            } else {
-                clickPoint(960, 1800)
-                logd("没找到");
-            }
-            sleep(2000);
-        }
-    } else if (FindText("下一步", true)) {
-    } else if (FindText("同意", true)) {
-    } else if (FindText("自定义目录")) {
-        if (FindText("获取失败")) {
-            for (let i = 0; i < 2; i++) {
-                back()
-                sleep(500);
-            }
-        }
-        let a = text("自定义目录").getOneNodeInfo(0);
-        if (a) {
-            let b = a.parent()
-            if (b) {
-                let c = b.previousSiblings()
-                if (c) {
-                    if (c[0].clickEx() || c[0].click()) {
-                        FindText("恢复", true)
-                    }
-                }
-            }
-        }
-    } else if (FindText("准备就绪")) {
-        let a = text("准备就绪").getOneNodeInfo(0);
-        if (a) {
-            let b = a.nextSiblings()
-            if (b) {
-                b[1].clickEx() || b[1].click()
-            }
-        }
-    } else if (FindText("恢复")) {
-        if (FindText("选择应用", true)) {
-        } else if (FindText("恢复", true)) {
-        }
-    } else if (FindText("数据")) {
-        let a = text("应用").getOneNodeInfo(0);
-        if (a) {
-            if (a.checked) {
-                a.clickEx() || a.click()
-            } else {
-                let b = text("数据").getOneNodeInfo(0);
-                if (b) {
-                    if (b.checked) {
-                        b.clickEx() || b.click()
-                    } else {
-                        let c = text("小红书").getOneNodeInfo(0);
-                        if (c) {
-                            let d = c.parent()
-                            if (d) {
-                                let e = d.parent()
-                                if (e) {
-                                    let f = e.nextSiblings()
-                                    if (f) {
-                                        let g = f[0].allChildren()
-                                        if (g) {
-                                            let g1 = g[g.length - 1]
-                                            if (g1) {
-                                                if (g1.clickEx() || g1.click()) {
-                                                    back();
-                                                    sleep(3000);
-                                                    while (true) {
-                                                        if (FindText("数据")) {
-                                                            let h = text("数据").getOneNodeInfo(0);
-                                                            if (h) {
-                                                                let k = h.previousSiblings()
-                                                                if (k) {
-                                                                    if (Number(k[0].text) === 1) {
-                                                                        if (FindText("开始恢复", true)) {
-                                                                            sleep(3000);
-                                                                        }
-                                                                    } else {
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            }
-                                                        } else if (FindText("准备就绪")) {
-                                                            break;
-                                                        }
-                                                        sleep(2000);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    } else {
-        utils.openApp("com.xayah.databackup")
-    }
-    return "还原备份"
-}
-
 function Compress(Device) {
     let re = utils.zip("/sdcard/000/" + Device + ".zip", null, ["/sdcard/DataBackup/"]);
-    return !!re;
-}
-
-function Decompression(FileName) {
-    let Tem = FileName
-    if (Tem.indexOf(".zip") > -1) {
+    if (re) {
+        return "上传"
     } else {
-        Tem = Tem + ".zip"
+        return "压缩"
     }
-    let ure = utils.unzip("/sdcard/Download/" + Tem, null, "/sdcard/");
-    return !!ure;
 }
 
 function RARCompress(Device) {
@@ -2008,163 +1802,6 @@ function CompressUP(LQYUser, LQYPass, Files_Path) {
     return "上传"
 }
 
-function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
-    if (FindText("Chrome")) {
-        let a = text("Chrome").getOneNodeInfo(0);
-        if (a) {
-            let b = a.parent()
-            if (b) {
-                let c = b.parent()
-                if (c) {
-                    if (c.clickEx() || c.click()) {
-                        sleep(1000);
-                        FindText("始终", true)
-                    }
-                }
-            }
-        }
-    } else if (FindTextEX(".*打开")) {
-        return "解压"
-    } else if (FindTextEX("正在下载")) {
-    } else if (FindDesc("使用浏览器打开")) {
-        let a = desc("使用浏览器打开").getOneNodeInfo(0);
-        if (a) {
-            let b = a.child(0)
-            if (b) {
-                let c = b.child(0)
-                if (c) {
-                    c.clickEx() || c.click()
-                }
-            }
-        }
-    } else if (FindId("submit", true)) {
-        sleep(3000);
-    } else if (FindText("下载")) {
-        let a = text("下载").getNodeInfo(0);
-        if (a) {
-            a[a.length - 1].clickEx() || a[a.length - 1].click()
-        }
-    } else if (FindText(Files_Path)) {
-        let a = text(Files_Path).getOneNodeInfo(0);
-        if (a) {
-            let b = a.parent()
-            if (b) {
-                let c = b.nextSiblings()
-                if (c) {
-                    a.clickEx() || a.click()
-                } else if (FindText(File_Path, true)) {
-                } else {
-                    RndSwiptUP()
-                }
-            }
-        }
-    } else if (FindText("网页登录", true)) {
-    } else if (FindText("其他登录方式", true)) {
-    } else if (FindText("关闭应用", true)) {
-        CloseBool = false
-    } else if (FindId("android:id/switch_widget")) {
-        let a = id("android:id/switch_widget").getOneNodeInfo(0);
-        if (a) {
-            if (a.checked === false) {
-                a.clickEx() || a.click()
-            } else {
-                back()
-            }
-        }
-    } else if (FindText("所有文件访问权限")) {
-        let a = text("蓝云").getOneNodeInfo(0);
-        if (a) {
-            let b = a.nextSiblings()
-            if (b) {
-                if (b[0].text === "允许") {
-                    back()
-                } else if (b[0].text === "不允许") {
-                    b[0].clickEx() || b[0].click()
-                }
-            }
-        }
-    } else if (FindText("仅在使用该应用时允许", true)) {
-    } else if (FindText("允许", true)) {
-    } else if (FindText("点击授予", true)) {
-    } else if (FindText("我已阅读并同意以上所有内容")) {
-        let a = text("我已阅读并同意以上所有内容").getOneNodeInfo(0);
-        if (a) {
-            let b = a.parent()
-            if (b) {
-                let c = b.nextSiblings()
-                if (c) {
-                    if (c[0].checked === false) {
-                        c[0].clickEx() || c[0].click()
-                    } else {
-                        FindText("开始使用", true)
-                    }
-                }
-            }
-        }
-    } else if (FindText("继续使用网页版", true)) {
-    } else if (FindId("nc_1_n1z")) {
-        let a = id("nc_1_n1z").getOneNodeInfo(0)
-        if (a) {
-            let b = id("nc_1__scale_text").getOneNodeInfo(0);
-            if (b) {
-                if (swipeToPoint(a.bounds.left + 20, a.bounds.top + 20, b.bounds.right, a.bounds.bottom, randomNum(500, 600))) {
-                    sleep(6000);
-                }
-            }
-        }
-    } else if (FindText("登 录")) {
-        let a = id("username").getOneNodeInfo(0);
-        if (a) {
-            if (a.inputText(LQYUser)) {
-                let b = a.parent()
-                if (b) {
-                    let c = b.nextSiblings()
-                    if (c) {
-                        let d = c[0].child(0)
-                        if (d) {
-                            if (d.inputText(LQYPass)) {
-                                let e = id("SM_BTN_1").getOneNodeInfo(0);
-                                if (e) {
-                                    let f = e.child(0)
-                                    if (f) {
-                                        if (FindId("rectMask", true)) {
-                                            sleep(6000);
-                                            if (FindId("nc_1_n1z")) {
-                                            } else if (FindText("登 录", true)) {
-                                                sleep(6000);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    } else if (FindText("刷新", true)) {
-    } else if (FindText("Download")) {
-        home()
-    } else {
-        let a = text("已授予").getNodeInfo(0);
-        if (a) {
-            if (a.length > 2) {
-                let b = id("com.tooyoung.lanzou:id/design_bottom_sheet").getOneNodeInfo(0);
-                if (b) {
-                    swipeToPoint(b.bounds.left + 20, b.bounds.top + 20, b.bounds.right, b.bounds.bottom, 1200)
-                }
-            }
-        } else {
-            if (CloseBool === true) {
-                back()
-            }
-            utils.openApp("com.tooyoung.lanzou")
-            sleep(3000);
-        }
-    }
-    return "蓝云下载"
-}
-
 function ModifyNickName(TimeName) {
     if (FindText(TimeName + ".zip")) {
         return "重置手机"
@@ -2211,16 +1848,17 @@ function ResetPhone() {
     return "重置手机"
 }
 
-function GetFileSName(imie) {
-    let url = "http://119.3.169.36:82/xiaohongshu/dev/heart";
+function GetUserPass(imie) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/account";
     let pa = {
-        "imie": imie
+        "imie": imie,
+        "plat": "1"
     }
     let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
     let json = JSON.parse(x)
     if (json) {
         if (json.code === 200) {
-            return json.data.name
+            return json.data
         } else if (json.code === 50) {
             toast(json.message);
             sleep(2000);
@@ -2232,52 +1870,28 @@ function GetFileSName(imie) {
     return ""
 }
 
-function UPFileName(imie, name) {
-    let url = "http://119.3.169.36:82/xiaohongshu/dev/bakname";
+function UPUserState(imie, ID) {
+    let url = "http://119.3.169.36:82/xiaohongshu/dev/incAccount";
     let pa = {
         "imie": imie,
-        "name": name
+        "id": ID
     }
     let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
     let json = JSON.parse(x)
     if (json) {
-        if ((json.code === 200)) {
-            toast(json.message)
-            sleep(2000)
-            return json.message
+        if (json.code === 200) {
+            return true
         } else if (json.code === 50) {
-            toast(json.message)
+            toast(json.message);
             sleep(2000);
         } else {
             toast(x);
             sleep(2000);
         }
     }
-    return ""
+    return false
 }
 
-function GetFileName(imie) {
-    let url = "http://119.3.169.36:82/xiaohongshu/dev/getbak";
-    let pa = {
-        "imie": imie,
-    }
-    let x = http.httpPost(url, pa, null, 30 * 1000, {"User-Agent": "json"});
-    let json = JSON.parse(x)
-    if (json) {
-        if ((json.code === 200)) {
-            toast(json.data.bakname)
-            sleep(2000)
-            return json.data.bakname
-        } else if (json.code === 50) {
-            toast(json.message)
-            sleep(2000);
-        } else {
-            toast(x);
-            sleep(2000);
-        }
-    }
-    return ""
-}
 
 function WorkAuto() {
     let Device = ""
@@ -2292,9 +1906,10 @@ function WorkAuto() {
     let LQYUser = "15827328375"
     let LQYPass = "qwe123456"
     let Files_Path = ""
-    let File_Path = ""
     let TimeName = 0
     let PKGNames = "com.rgxsq"
+    let TemList = []
+    let ID = ""
 
     while (true) {
         if (Task === "设置语言") {
@@ -2308,23 +1923,6 @@ function WorkAuto() {
                 home()
                 Device = Task
                 toast("IMEI:" + Device);
-                sleep(2000);
-                Task = "获取文件夹名"
-            }
-        } else if (Task === "获取文件夹名") {
-            Files_Path = GetFileSName(Device)
-            if (Files_Path !== "") {
-                toast("文件夹名:" + Files_Path);
-                sleep(2000);
-                Task = "获取文件名"
-            }
-        } else if (Task === "获取文件名") {
-            File_Path = GetFileName(Device)
-            if (File_Path !== "") {
-                if (File_Path.indexOf(".zip")) {
-                    File_Path = File_Path + ".zip"
-                }
-                toast("文件名:" + File_Path);
                 sleep(2000);
                 Task = "获取下载链接"
             }
@@ -2345,14 +1943,13 @@ function WorkAuto() {
         } else if (Task === "判断APP下载") {
             Task = BFSHS(TemWork)
             if (Task === "打开小红书") {
-                Task = "蓝云下载"
-                // if (JSONS.独角兽) {
-                //     Task = "独角兽授权"
-                // } else if (JSONS.红豆) {
-                //     Task = "红豆授权"
-                // } else if (JSONS.大象) {
-                //     Task = "大象授权"
-                // }
+                if (JSONS.独角兽) {
+                    Task = "获取账号密码"
+                } else if (JSONS.红豆) {
+                    Task = "获取账号密码"
+                } else if (JSONS.大象) {
+                    Task = "获取账号密码"
+                }
             }
         } else if (Task === "下载面具") {
             if (JSONS.面具) {
@@ -2386,27 +1983,56 @@ function WorkAuto() {
             if (JSONS.RAR) {
                 Task = DownUninstallRAR(JSONS)
             }
-        }
-            // else if (Task === "打开小红书") {
-            //     Task = OpenXHS(TemWork)
-            //     if (Task === TemWork) {
-            //         if (TemWork === "独角兽") {
-            //             Task = "独角兽授权"
-            //         } else if (TemWork === "红豆授权") {
-            //             Task = "红豆授权"
-            //         } else if (TemWork === "大象平台") {
-            //             Task = "大象授权"
-            //         }
-            //     }
-            // }
-            // else if (Task === "独角兽授权") {
-            //     Task = LoginDJS(DJSUser, DJSPass)
-            // } else if (Task === "红豆授权") {
-            //     Task = LoginHD(DJSUser, DJSPass)
-            // } else if (Task === "大象授权") {
-            //     Task = LoginDX(DJSUser, DJSPass)
-        // }
-        else if (Task === "填资料") {
+        } else if (Task === "打开小红书") {
+            Task = OpenXHS(TemWork)
+            if (Task === TemWork) {
+                if (TemWork === "独角兽") {
+                    Task = "获取账号密码"
+                } else if (TemWork === "红豆授权") {
+                    Task = "获取账号密码"
+                } else if (TemWork === "大象平台") {
+                    Task = "获取账号密码"
+                }
+            }
+        } else if (Task === "获取账号密码") {
+            Task = GetUserPass(Device)
+            if (Task && Task !== "") {
+                TemList = Task.username.split("----")
+                if (TemList.length > 1) {
+                    ID = Task.id
+                    DJSUser = TemList[0]
+                    DJSPass = TemList[1]
+                    if (TemWork === "独角兽") {
+                        Task = "独角兽授权"
+                    } else if (TemWork === "红豆授权") {
+                        Task = "红豆授权"
+                    } else if (TemWork === "大象平台") {
+                        Task = "大象授权"
+                    }
+                } else {
+                    toast(Task);
+                    Task = "获取账号密码"
+                    sleep(2000);
+                }
+            } else {
+                Task = "获取账号密码"
+            }
+        } else if (Task === "独角兽授权") {
+            Task = LoginDJS(DJSUser, DJSPass)
+            if (Task === "卸载本软") {
+                Task = "上传账号状态"
+            }
+        } else if (Task === "红豆授权") {
+            Task = LoginHD(DJSUser, DJSPass)
+            if (Task === "卸载本软") {
+                Task = "上传账号状态"
+            }
+        } else if (Task === "大象授权") {
+            Task = LoginDX(DJSUser, DJSPass)
+            if (Task === "卸载本软") {
+                Task = "上传账号状态"
+            }
+        } else if (Task === "填资料") {
             Task = ChangeNumber()
         } else if (Task === "养号") {
             Task = Give_Up()
@@ -2415,22 +2041,26 @@ function WorkAuto() {
             if (Task === "关闭APP") {
                 Task = "关闭小红书"
             } else if (Task === "启动APP") {
-                Task = "解压"
+                Task = "备份"
                 // Task = "打开面具"
             }
         } else if (Task === "打开面具") {
             Task = OpenMJ()
-        } else if (Task === "蓝云下载") {
-            Task = CompressDown(LQYUser, LQYPass, Files_Path, File_Path)
-        } else if (Task === "解压") {
-            if (Decompression(File_Path)) {
-                Task = "还原备份"
-            }
-        } else if (Task === "还原备份") {
-            Task = Reduction()
+        } else if (Task === "备份") {
+            Task = Backups()
+        } else if (Task === "压缩") {
+            Task = RARCompress(Device)
+        } else if (Task === "上传") {
+            Task = CompressUP(LQYUser, LQYPass, Files_Path)
             TimeName = time()
+        } else if (Task === "修改备份昵称") {
+            Task = ModifyNickName(TimeName)
         } else if (Task === "重置手机") {
             Task = ResetPhone()
+        } else if (Task === "上传账号状态") {
+            if (UPUserState(Device, ID)) {
+                Task = "卸载本软"
+            }
         } else if (Task === "卸载本软") {
             UninstallThisSoftware(PKGNames)
         } else if (Task === "停止") {
