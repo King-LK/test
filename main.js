@@ -2022,19 +2022,10 @@ function WorkAuto() {
             }
         } else if (Task === "独角兽授权") {
             Task = LoginDJS(DJSUser, DJSPass)
-            if (Task === "卸载本软") {
-                Task = "上传账号状态"
-            }
         } else if (Task === "红豆授权") {
             Task = LoginHD(DJSUser, DJSPass)
-            if (Task === "卸载本软") {
-                Task = "上传账号状态"
-            }
         } else if (Task === "大象授权") {
             Task = LoginDX(DJSUser, DJSPass)
-            if (Task === "卸载本软") {
-                Task = "上传账号状态"
-            }
         } else if (Task === "填资料") {
             Task = ChangeNumber()
         } else if (Task === "养号") {
@@ -2060,10 +2051,6 @@ function WorkAuto() {
             Task = ModifyNickName(TimeName)
         } else if (Task === "重置手机") {
             Task = ResetPhone()
-        } else if (Task === "上传账号状态") {
-            if (UPUserState(Device, ID)) {
-                Task = "卸载本软"
-            }
         } else if (Task === "卸载本软") {
             UninstallThisSoftware(PKGNames)
         } else if (Task === "停止") {
@@ -2076,4 +2063,5 @@ function WorkAuto() {
 }
 
 main();
+
 
