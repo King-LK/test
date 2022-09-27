@@ -31,6 +31,7 @@ function main() {
     //如果自动化服务正常
     toast("开始执行脚本...");
     sleep(2000);
+    exit()
     WorkAuto()
 }
 
