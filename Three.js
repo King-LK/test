@@ -31,7 +31,6 @@ CloseBool = true
 function main() {
     toast("开始执行脚本...");
     sleep(2000);
-    exit()
     WorkAuto()
 }
 
