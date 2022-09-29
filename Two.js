@@ -31,7 +31,6 @@ function main() {
     //如果自动化服务正常
     toast("开始执行脚本...");
     sleep(2000);
-    exit()
     WorkAuto()
 }
 
@@ -2037,21 +2036,6 @@ function WorkAuto() {
     }
     exit()
 }
-
-// if (!autoServiceStart(3)) {
-//     toast("自动化服务启动失败，无法执行脚本")
-//     sleep(2000);
-//     exit();
-// }
-
-// for (let i = 0; i < 10; i++) {
-//     if (FindText("允许", true)) {
-//     } else if (FindText("立即开始", true)) {
-//     } else {
-//         toast("等待时间" + i + "/10");
-//     }
-//     sleep(2000);
-// }
 
 main();
 
