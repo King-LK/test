@@ -30,7 +30,6 @@ Max = 5
 function main() {
     toast("开始执行脚本...");
     sleep(2000);
-    exit()
     WorkAuto()
 }
 
