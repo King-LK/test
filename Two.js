@@ -1614,56 +1614,89 @@ function Backups() {
         if (FindText("选择应用", true)) {
 
         } else if (FindText("备份", true)) {
-
         }
     } else if (FindText("数据")) {
+        logd("应用取消");
         let a = text("应用").getOneNodeInfo(0);
-        if (a) {
+        for (let i = 0; i < 60; i++) {
+            if (a.checked) {
+                break
+            } else {
+                a.clickEx() || a.click()
+            }
+            sleep(2000);
+            a = text("应用").getOneNodeInfo(0);
+        }
+        a = text("应用").getOneNodeInfo(0);
+        for (let i = 0; i < 60; i++) {
             if (a.checked) {
                 a.clickEx() || a.click()
             } else {
-                let b = text("数据").getOneNodeInfo(0);
-                if (b) {
-                    if (b.checked) {
-                        b.clickEx() || b.click()
-                    } else {
-                        let c = text("小红书").getOneNodeInfo(0);
-                        if (c) {
-                            let d = c.parent()
-                            if (d) {
-                                let e = d.parent()
-                                if (e) {
-                                    let f = e.nextSiblings()
-                                    if (f) {
-                                        let g = f[0].child(1)
-                                        if (g) {
-                                            if (g.clickEx() || g.click()) {
-                                                back();
-                                                sleep(3000);
-                                                while (true) {
-                                                    if (FindText("数据")) {
-                                                        let h = text("数据").getOneNodeInfo(0);
-                                                        if (h) {
-                                                            let k = h.previousSiblings()
-                                                            if (k) {
-                                                                if (Number(k[0].text) === 1) {
-                                                                    if (FindText("开始备份", true)) {
-                                                                        sleep(3000);
-                                                                    }
-                                                                } else {
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
-                                                    } else if (FindText("准备就绪")) {
-                                                        break;
-                                                    }
-                                                    sleep(2000);
+                break
+            }
+            sleep(2000);
+            a = text("应用").getOneNodeInfo(0);
+        }
+        logd("数据取消");
+        let b = text("数据").getOneNodeInfo(0);
+        for (let i = 0; i < 60; i++) {
+            if (b.checked) {
+                break
+            } else {
+                b.clickEx() || b.click()
+            }
+            sleep(2000);
+            b = text("数据").getOneNodeInfo(0);
+        }
+        b = text("数据").getOneNodeInfo(0);
+        for (let i = 0; i < 60; i++) {
+            if (b.checked) {
+                b.clickEx() || b.click()
+            } else {
+                break
+            }
+            sleep(2000);
+            b = text("数据").getOneNodeInfo(0);
+        }
+        let c = text("小红书").getOneNodeInfo(0);
+        if (c) {
+            let d = c.parent()
+            if (d) {
+                let e = d.parent()
+                if (e) {
+                    let f = e.nextSiblings()
+                    if (f) {
+                        let g = f[0].allChildren()
+                        if (g) {
+                            for (let i = 0; i < g.length; i++) {
+                                if (g[i].text === "应用") {
+                                    g[i].clickEx() || g[i].click()
+                                } else if (g[i].text === "数据") {
+                                    g[i].clickEx() || g[i].click()
+                                }
+                                sleep(1000);
+                            }
+                            back();
+                            sleep(3000);
+                            while (true) {
+                                if (FindText("数据")) {
+                                    let h = text("数据").getOneNodeInfo(0);
+                                    if (h) {
+                                        let k = h.previousSiblings()
+                                        if (k) {
+                                            if (Number(k[0].text) === 1) {
+                                                if (FindText("开始备份", true)) {
+                                                    sleep(3000);
                                                 }
+                                            } else {
+                                                break;
                                             }
                                         }
                                     }
+                                } else if (FindText("准备就绪")) {
+                                    break;
                                 }
+                                sleep(2000);
                             }
                         }
                     }
@@ -1935,7 +1968,7 @@ function WorkAuto() {
         } else if (Task === "获取文件夹名") {
             Files_Path = GetFileSName(Device)
             if (Files_Path !== "") {
-                Task = "填资料"
+                Task = "备份"
             }
         } else if (Task === "获取下载链接") {
             JSONS = RegExUrl()
