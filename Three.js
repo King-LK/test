@@ -2002,6 +2002,11 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
         } else {
             RndSwiptUP()
         }
+    } else if (FindText(Files_Path)) {
+        if (FindText(File_Path, true)) {
+        } else {
+            RndSwiptUP()
+        }
     } else if (FindText("网页登录", true)) {
     } else if (FindText("其他登录方式", true)) {
     } else if (FindText("关闭应用", true)) {
