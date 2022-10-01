@@ -417,13 +417,15 @@ function BFSHS(TemWork) {
             if (FindText("Magisk") === false && FindDesc("Magisk") === false) {
                 return "下载面具"
             }
-        } else if (FindText("小红书") === false && FindDesc("小红书") === false) {
-            swipeToPoint(200, 1500, 300, 50, 600)
-            sleep(1000);
-            if (FindText("小红书") === false && FindDesc("小红书") === false) {
-                return "下载小红书"
-            }
-        } else if (FindText("数据备份") === false && FindDesc("数据备份") === false) {
+        }
+            // else if (FindText("小红书") === false && FindDesc("小红书") === false) {
+            //     swipeToPoint(200, 1500, 300, 50, 600)
+            //     sleep(1000);
+            //     if (FindText("小红书") === false && FindDesc("小红书") === false) {
+            //         return "下载小红书"
+            //     }
+        // }
+        else if (FindText("数据备份") === false && FindDesc("数据备份") === false) {
             swipeToPoint(200, 1500, 300, 50, 600)
             sleep(1000);
             if (FindText("数据备份") === false && FindDesc("数据备份") === false) {
@@ -450,10 +452,10 @@ function BFSHS(TemWork) {
             if (FindText("蓝云") === false && FindDesc("蓝云") === false) {
                 return "下载蓝云"
             }
-        } else if (FindText("Magisk") && FindText("小红书") && FindText("数据备份") && FindText("蓝云")) {
-            return "打开小红书"
-        } else if (FindDesc("Magisk") && FindDesc("小红书") && FindDesc("数据备份") && FindDesc("蓝云")) {
-            return "打开小红书"
+        } else if (FindText("Magisk") && FindText("数据备份") && FindText("蓝云")) {
+            return "打开小红书"//&& FindText("小红书")
+        } else if (FindDesc("Magisk") && FindDesc("数据备份") && FindDesc("蓝云")) {
+            return "打开小红书"//&& FindDesc("小红书")
         }
     } else {
         swipeToPoint(200, 1500, 300, 50, 1200)
@@ -1779,96 +1781,7 @@ function Reduction() {
                 b[1].clickEx() || b[1].click()
             }
         }
-    } else if (FindText("恢复")) {
-        if (FindText("选择应用", true)) {
-        } else if (FindText("恢复", true)) {
-        }
-    } else if (FindText("数据")) {
-        let a = text("应用").getOneNodeInfo(0);
-        for (let i = 0; i < 60; i++) {
-            if (a.checked) {
-                break
-            } else {
-                a.clickEx() || a.click()
-            }
-            sleep(2000);
-            a = text("应用").getOneNodeInfo(0);
-        }
-        a = text("应用").getOneNodeInfo(0);
-        for (let i = 0; i < 60; i++) {
-            if (a.checked) {
-                a.clickEx() || a.click()
-            } else {
-                break
-            }
-            sleep(2000);
-            a = text("应用").getOneNodeInfo(0);
-        }
-        let b = text("数据").getOneNodeInfo(0);
-        for (let i = 0; i < 60; i++) {
-            if (b.checked) {
-                break
-            } else {
-                b.clickEx() || b.click()
-            }
-            sleep(2000);
-            b = text("数据").getOneNodeInfo(0);
-        }
-        b = text("数据").getOneNodeInfo(0);
-        for (let i = 0; i < 60; i++) {
-            if (b.checked) {
-                b.clickEx() || b.click()
-            } else {
-                break
-            }
-            sleep(2000);
-            b = text("数据").getOneNodeInfo(0);
-        }
-        let c = text("小红书").getOneNodeInfo(0);
-        if (c) {
-            let d = c.parent()
-            if (d) {
-                let e = d.parent()
-                if (e) {
-                    let f = e.nextSiblings()
-                    if (f) {
-                        let g = f[0].allChildren()
-                        if (g) {
-                            for (let i = 0; i < g.length; i++) {
-                                if (g[i].text === "应用") {
-                                    g[i].clickEx() || g[i].click()
-                                } else if (g[i].text === "数据") {
-                                    g[i].clickEx() || g[i].click()
-                                }
-                                sleep(1000);
-                            }
-                            back();
-                            sleep(3000);
-                            while (true) {
-                                if (FindText("数据")) {
-                                    let h = text("数据").getOneNodeInfo(0);
-                                    if (h) {
-                                        let k = h.previousSiblings()
-                                        if (k) {
-                                            if (Number(k[0].text) === 1) {
-                                                if (FindText("开始恢复", true)) {
-                                                    sleep(3000);
-                                                }
-                                            } else {
-                                                break;
-                                            }
-                                        }
-                                    }
-                                } else if (FindText("准备就绪")) {
-                                    break;
-                                }
-                                sleep(2000);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    } else if (FindText("开始恢复", true)) {
     } else {
         utils.openApp("com.xayah.databackup")
     }
@@ -2073,7 +1986,7 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
         if (a) {
             a[a.length - 1].clickEx() || a[a.length - 1].click()
         }
-    } else if (FindText(Files_Path)) {
+    } else if (FindText("文件夹")) {
         let a = text(Files_Path).getOneNodeInfo(0);
         if (a) {
             let b = a.parent()
@@ -2086,6 +1999,8 @@ function CompressDown(LQYUser, LQYPass, Files_Path, File_Path) {
                     RndSwiptUP()
                 }
             }
+        } else {
+            RndSwiptUP()
         }
     } else if (FindText("网页登录", true)) {
     } else if (FindText("其他登录方式", true)) {
