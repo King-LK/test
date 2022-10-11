@@ -29,6 +29,7 @@ Max = 5
 CloseBool = true
 
 function main() {
+    exit()
     toast("开始执行脚本...");
     sleep(2000);
     WorkAuto()
