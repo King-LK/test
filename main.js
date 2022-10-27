@@ -869,6 +869,68 @@ function DownUninstallDX(URlJSON) {
     return "下载大象平台";
 }
 
+function DownUninstallSY(URlJSON) {
+    if (FindText("完成", true)) {
+        toast("返回桌面");
+        for (let i = 0; i < 20; i++) {
+            back()
+            sleep(300);
+        }
+        return "判断APP下载"
+    } else if (FindText("下一步") || FindText("正在安装...")) {
+    } else if (FindTextEX(".*下载“微红热更新.*") || FindText("是否重新下载文件？")) {
+        back()
+    } else if (FindText("给5星")) {
+        FindId("com.mmbox.xbrowser:id/btn_close", true)
+    } else if (FindDesc("下载管理程序通知：大象.apk")) {
+        if (swipeToPoint(200, 20, 300, 800, 1200)) {
+            sleep(3000);
+            FindText("鲨鱼.apk", true)
+        }
+    } else if (FindText("确定", true)) {
+        // while (true) {
+        //     if (FindText("下载列表")) {
+        //         break
+        //     } else if (FindText("下载", true)) {
+        //     } else if (FindId("com.mmbox.xbrowser:id/toolbar_btn_menu", true)) {
+        //     } else if (FindText("确定", true)) {
+        //     }
+        //     sleep(2000);
+        // }
+    } else if (FindText("下载列表")) {
+        FindText("鲨鱼.apk", true)
+    } else if (FindText("安装", true)) {
+    } else if (FindDescEx(".*打开按钮", true)) {
+    } else if (FindTextEX("鲨鱼.apk")) {
+        if (FindId("submit", true)) {
+        } else if (FindText("下载", true)) {
+        }
+    } else if (FindId("android:id/switch_widget")) {
+        let a = id("android:id/switch_widget").getOneNodeInfo(0);
+        if (a) {
+            if (a.checked === false) {
+                a.clickEx() || a.click()
+            } else {
+                back()
+            }
+        }
+    } else if (FindText("Chrome", true)) {
+        sleep(3000);
+        if (FindText("始终", true)) {
+        }
+    } else if (FindText("始终", true)) {
+    } else if (FindText("允许", true)) {
+    } else if (FindText("验证并下载", true)) {
+    } else if (FindText("下载", true)) {
+    } else if (FindText("设置", true)) {
+    } else if (FindTextEX("正在下载文件") || FindTextEX("正在安装…")) {
+    } else {
+        openUrl(URlJSON.鲨鱼)
+    }
+    sleep(2000);
+    return "下载鲨鱼";
+}
+
 function DownUninstallYYBF(URlJSON) {
     if (FindText("完成", true)) {
         toast("返回桌面");
@@ -1207,6 +1269,44 @@ function LoginDX(User, Pass) {
         utils.openApp("com.cm.elephant")
     }
     return "大象授权"
+}
+
+function LoginSY(User, Pass) {
+    if (FindText("一键授权")) {
+        return "卸载本软"
+        // for (let i = 0; i < 60; i++) {
+        //     i++
+        //     if (FindText("确定") || FindText("欢迎来到小红书") || FindText("我") || FindText("好久不见，欢迎回来")) {
+        //         return "填资料"
+        //     }
+        //     toast("等待" + i + "/60秒");
+        //     sleep(2000);
+        // }
+        // back()
+    } else if (FindText("仅在使用该应用时允许", true)) {
+        sleep(3000);
+    } else if (FindText("我的收藏", true)) {
+        FindText("小红书", true)
+    } else if (FindText("登录")) {
+        let a = id("com.bajiao.taishan:id/et_tel").getOneNodeInfo(0)
+        if (a) {
+            if (a.inputText(User)) {
+                let b = id("com.bajiao.taishan:id/et_pass").getOneNodeInfo(0);
+                if (b) {
+                    if (b.inputText(Pass)) {
+                        if (FindText("登录", true)) {
+                            sleep(8000);
+                        }
+                    }
+                }
+            }
+
+        }
+    } else if (FindText("鲨鱼", true) || FindDesc("鲨鱼", true)) {
+    } else {
+        utils.openApp("com.bajiao.taishan")
+    }
+    return "鲨鱼授权"
 }
 
 function LoginHD(User, Pass) {
@@ -1904,8 +2004,8 @@ function WorkAuto() {
     let Task = "设置语言"
     let JSONS = {}
     let TemWork = ""
-    let DJSUser = "l880820"
-    let DJSPass = "l880820"
+    let DJSUser = ""
+    let DJSPass = ""
     let LQYUser = "15827328375"
     let LQYPass = "qwe123456"
     let Files_Path = ""
@@ -1941,16 +2041,15 @@ function WorkAuto() {
                 } else if (JSONS.大象) {
                     TemWork = "大象平台"
                     Task = "判断APP下载"
+                } else if (JSONS.鲨鱼) {
+                    TemWork = "鲨鱼"
+                    Task = "判断APP下载"
                 }
             }
         } else if (Task === "判断APP下载") {
             Task = BFSHS(TemWork)
             if (Task === "打开小红书") {
-                if (JSONS.独角兽) {
-                    Task = "获取账号密码"
-                } else if (JSONS.红豆) {
-                    Task = "获取账号密码"
-                } else if (JSONS.大象) {
+                if (JSONS.独角兽 || JSONS.红豆 || JSONS.大象 || JSONS.鲨鱼) {
                     Task = "获取账号密码"
                 }
             }
@@ -1978,6 +2077,10 @@ function WorkAuto() {
             if (JSONS.大象) {
                 Task = DownUninstallDX(JSONS)
             }
+        } else if (Task === "下载鲨鱼") {
+            if (JSONS.鲨鱼) {
+                Task = DownUninstallSY(JSONS)
+            }
         } else if (Task === "下载应用备份") {
             if (JSONS.应用备份) {
                 Task = DownUninstallYYBF(JSONS)
@@ -1989,11 +2092,7 @@ function WorkAuto() {
         } else if (Task === "打开小红书") {
             Task = OpenXHS(TemWork)
             if (Task === TemWork) {
-                if (TemWork === "独角兽") {
-                    Task = "获取账号密码"
-                } else if (TemWork === "红豆授权") {
-                    Task = "获取账号密码"
-                } else if (TemWork === "大象平台") {
+                if (TemWork === "独角兽" || TemWork === "红豆授权" || TemWork === "大象平台" || TemWork === "鲨鱼") {
                     Task = "获取账号密码"
                 }
             }
@@ -2011,6 +2110,8 @@ function WorkAuto() {
                         Task = "红豆授权"
                     } else if (TemWork === "大象平台") {
                         Task = "大象授权"
+                    } else if (TemWork === "鲨鱼") {
+                        Task = "鲨鱼授权"
                     }
                 } else {
                     toast(Task);
@@ -2026,7 +2127,10 @@ function WorkAuto() {
             Task = LoginHD(DJSUser, DJSPass)
         } else if (Task === "大象授权") {
             Task = LoginDX(DJSUser, DJSPass)
+        } else if (Task === "鲨鱼授权") {
+            Task = LoginSY(DJSUser, DJSPass)
         } else if (Task === "填资料") {
+
             Task = ChangeNumber()
         } else if (Task === "养号") {
             Task = Give_Up()
