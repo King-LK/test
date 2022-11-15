@@ -885,7 +885,7 @@ function DownUninstallSY(URlJSON) {
     } else if (FindDesc("下载管理程序通知：大象.apk")) {
         if (swipeToPoint(200, 20, 300, 800, 1200)) {
             sleep(3000);
-            FindText("鲨鱼.apk", true)
+            FindText("鯊魚.apk", true)
         }
     } else if (FindText("确定", true)) {
         // while (true) {
@@ -898,10 +898,10 @@ function DownUninstallSY(URlJSON) {
         //     sleep(2000);
         // }
     } else if (FindText("下载列表")) {
-        FindText("鲨鱼.apk", true)
+        FindText("鯊魚.apk", true)
     } else if (FindText("安装", true)) {
     } else if (FindDescEx(".*打开按钮", true)) {
-    } else if (FindTextEX("鲨鱼.apk")) {
+    } else if (FindTextEX("鯊魚.apk")) {
         if (FindId("submit", true)) {
         } else if (FindText("下载", true)) {
         }
@@ -928,7 +928,7 @@ function DownUninstallSY(URlJSON) {
         openUrl(URlJSON.鲨鱼)
     }
     sleep(2000);
-    return "下载鲨鱼";
+    return "下载鯊魚";
 }
 
 function DownUninstallYYBF(URlJSON) {
