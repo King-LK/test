@@ -2116,7 +2116,7 @@ function WorkAuto() {
                         Task = "鲨鱼授权"
                     }
                 } else {
-                    toast(Task);
+                    toast(JSON.stringify(Task));
                     Task = "获取账号密码"
                     sleep(2000);
                 }
