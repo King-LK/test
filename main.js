@@ -1146,6 +1146,8 @@ function RegExUrl() {
                         g.蓝云 = e
                     } else if (f === "大象") {
                         g.大象 = e
+                    } else if (f === "鲨鱼") {
+                        g.鲨鱼 = e
                     } else if (f === "应用备份") {
                         g.应用备份 = e
                     } else if (f === "压缩") {
@@ -2167,4 +2169,5 @@ function WorkAuto() {
 }
 
 main();
+
 
