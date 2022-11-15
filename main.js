@@ -2094,7 +2094,7 @@ function WorkAuto() {
         } else if (Task === "打开小红书") {
             Task = OpenXHS(TemWork)
             if (Task === TemWork) {
-                if (TemWork === "独角兽" || TemWork === "红豆授权" || TemWork === "大象平台" || TemWork === "鲨鱼") {
+                if (TemWork === "独角兽" || TemWork === "红豆授权" || TemWork === "大象平台" || TemWork === "鯊魚") {
                     Task = "获取账号密码"
                 }
             }
@@ -2112,7 +2112,7 @@ function WorkAuto() {
                         Task = "红豆授权"
                     } else if (TemWork === "大象平台") {
                         Task = "大象授权"
-                    } else if (TemWork === "鲨鱼") {
+                    } else if (TemWork === "鯊魚") {
                         Task = "鲨鱼授权"
                     }
                 } else {
@@ -2169,4 +2169,5 @@ function WorkAuto() {
 }
 
 main();
+
 
