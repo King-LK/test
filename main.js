@@ -2044,7 +2044,7 @@ function WorkAuto() {
                     TemWork = "大象平台"
                     Task = "判断APP下载"
                 } else if (JSONS.鲨鱼) {
-                    TemWork = "鲨鱼"
+                    TemWork = "鯊魚"
                     Task = "判断APP下载"
                 }
             }
