@@ -2079,7 +2079,7 @@ function WorkAuto() {
             if (JSONS.大象) {
                 Task = DownUninstallDX(JSONS)
             }
-        } else if (Task === "下载鲨鱼") {
+        } else if (Task === "下载鯊魚") {
             if (JSONS.鲨鱼) {
                 Task = DownUninstallSY(JSONS)
             }
