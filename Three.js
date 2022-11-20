@@ -29,7 +29,6 @@ Max = 5
 CloseBool = true
 
 function main() {
-    //exit()
     toast("开始执行脚本...");
     sleep(2000);
     WorkAuto()
@@ -1796,13 +1795,25 @@ function Compress(Device) {
 
 function Decompression(FileName) {
     let Tem = FileName
-    if (Tem.indexOf(".zip") > -1) {
-    } else {
+    if (Tem.indexOf(".zip") === -1) {
         Tem = Tem + ".zip"
     }
+    logd("解压" + Tem);
+    sleep(2000);
     let ure = utils.unzip("/sdcard/Download/" + Tem, null, "/sdcard/");
+    logd("解压" + !!ure);
+    sleep(2000);
     return !!ure;
 }
+
+// var data = file.listDir("/sdcard/Download/");
+// for (var i = 0; i < data.length; i++) {
+//     logd("path " + data[i]);
+// }
+// logd(Decompression("1664708269300.zip"))
+
+
+exit()
 
 function RARCompress(Device) {
     // let re = utils.zip("/sdcard/000/" + Device + ".zip", null, ["/sdcard/DataBackup/"]);
@@ -2271,7 +2282,7 @@ function WorkAuto() {
         } else if (Task === "获取文件名") {
             File_Path = GetFileName(Device)
             if (File_Path !== "") {
-                if (File_Path.indexOf(".zip")) {
+                if (File_Path.indexOf(".zip") === -1) {
                     File_Path = File_Path + ".zip"
                 }
                 toast("文件名:" + File_Path);
