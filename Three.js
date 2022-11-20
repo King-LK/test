@@ -1737,7 +1737,7 @@ function Backups() {
 
 function Reduction() {
     if (FindText("恢复完成")) {
-        return "停止"
+        return "卸载本软"
     } else if (FindText("完成", true)) {
     } else if (FindText("激活Bashrc环境", true)) {
     } else if (FindText("释放预编译二进制文件", true)) {
@@ -1795,15 +1795,33 @@ function Compress(Device) {
 
 function Decompression(FileName) {
     let Tem = FileName
+    let TemName
     if (Tem.indexOf(".zip") === -1) {
         Tem = Tem + ".zip"
+        TemName = FileName
+    } else {
+        TemName = FileName.replace(".zip", "")
     }
-    toast("解压" + Tem);
-    sleep(2000);
-    let ure = utils.unzip("/sdcard/Download/" + Tem, null, "/sdcard/");
-    toast("解压" + ure);
-    sleep(2000);
-    return !!ure;
+
+    if (FindId("com.google.android.apps.nbu.files:id/complete_bytes")) {
+    } else if (FindText("请稍等片刻")) {
+    } else if (FindText("此处没有任何文件。")) {
+        return true
+    } else if (FindText("移至此处", true)) {
+    } else if (FindText("移至", true)) {
+        FindText("内部存储设备", true)
+    } else if (FindText("DataBackup")) {
+        FindId("com.google.android.apps.nbu.files:id/drop_down_arrow", true)
+    } else if (FindText(TemName, true)) {
+    } else if (FindText("完成", true)) {
+    } else if (FindText("解压缩", true)) {
+    } else if (FindText(Tem, true)) {
+    } else if (FindText("Download", true)) {
+    } else if (FindText("内部存储设备", true)) {
+    } else {
+        utils.openApp("com.google.android.apps.nbu.files")
+    }
+    return false;
 }
 
 // var data = file.listDir("/sdcard/Download/");
