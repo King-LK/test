@@ -1801,7 +1801,7 @@ function Decompression(FileName) {
     toast("解压" + Tem);
     sleep(2000);
     let ure = utils.unzip("/sdcard/Download/" + Tem, null, "/sdcard/");
-    toast("解压" + !!ure);
+    toast("解压" + ure);
     sleep(2000);
     return !!ure;
 }
