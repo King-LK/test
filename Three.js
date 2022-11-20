@@ -1813,7 +1813,7 @@ function Decompression(FileName) {
 // logd(Decompression("1664708269300.zip"))
 
 
-exit()
+// exit()
 
 function RARCompress(Device) {
     // let re = utils.zip("/sdcard/000/" + Device + ".zip", null, ["/sdcard/DataBackup/"]);
