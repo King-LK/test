@@ -130,11 +130,11 @@ function CloseApp(SetName, AppName, PkgName) {
 function UninstallThisSoftware() {
     if (FindText("确定", true)) {
     } else if (FindText("卸载", true)) {
-    } else if (FindText("一键授权")) {
+    } else if (FindText("恢复完成")) {
         home()
     } else if (FindText("应用信息", true)) {
-    } else if (FindText("热更新授权")) {
-        let a = text("热更新授权").getOneNodeInfo(0);
+    } else if (FindText("还原文件")) {
+        let a = text("还原文件").getOneNodeInfo(0);
         if (a) {
             a.longClick()
         }
