@@ -32,7 +32,7 @@ h = device.getScreenHeight()
 //     // if (!autoServiceStart(3)) {
 //     //     logd("自动化服务启动失败，无法执行脚本")
 //     //     exit();
-//     //     return;
+//     //     return; 
 //     // }
 //     toast("开始执行脚本...");
 //     home();
