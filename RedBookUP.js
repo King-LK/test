@@ -337,7 +337,9 @@ function AJS(USER,PASS){
     } else  if (FindText("收藏")) {
         let a = id("com.fvcorp.android.aijiasuclient:id/listViewAll");
         if (a) {
-            logd(clickRandom(a));
+            if (clickRandom(a)) {
+                sleep(10*1000);
+            }
         }
     } else if (FindText("以后再说",true)) {
     } else if (FindId("com.fvcorp.android.aijiasuclient:id/textButton",true)) {
@@ -351,7 +353,7 @@ function AJS(USER,PASS){
                 if (b) {
                     if (b.inputText(PASS)) {
                         if (FindId("com.fvcorp.android.aijiasuclient:id/buttonLogin",true)) {
-                            sleep(5000);
+                            sleep(10*1000);
                         }
                     }
                 }
