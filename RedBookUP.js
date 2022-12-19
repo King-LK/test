@@ -368,14 +368,14 @@ function AJS(USER,PASS){
         if (a && a.text !== "") {
             return "小红书操作"
         }
-    } else {utils.openApp("com.fvcorp.android.aijiasuclient")}
+    } else {utils.openApp("com.fvcorp.android.aijiasuclient");}
     return "VPN操作"
 }
 
 function RedBook(UID){
     if (FindText("发弹幕")) {
-        for (let i = 0; i < randomNum(10,15); i++) {
-            toast("随机看视频，时间：" + i);
+        for (let i = 0; i < randomNum(45,60); i++) {
+            toast("随机看视频，时间：" + String(i * 2) + "秒");
             sleep(2000);
         }
         for (let i = 0; i < 10; i++) {
@@ -387,6 +387,10 @@ function RedBook(UID){
                     a.clickEx()||a.click()
                 }
             }
+            sleep(2000);
+        }
+        for (let i = 0; i < randomNum(45,60); i++) {
+            toast("随机看视频，时间：" + String(i * 2) + "秒");
             sleep(2000);
         }
     } else if (FindText("说点什么...")) {
@@ -410,8 +414,17 @@ function RedBook(UID){
             sleep(2000);
         }
     }else if (FindText("首页")) {
-        Jump_XHS_Works(UID)
-    } else {utils.openApp("com.xingin.xhs")}
+        if (UID !== "") {
+            Jump_XHS_Works(UID)
+        }
+
+    } else {
+        utils.openApp("com.xingin.xhs")
+        for (let i = 0; i < randomNum(8,10); i++) {
+            toast("休息时间:" + String(i * 2) + "秒");
+            sleep(2000);
+        }
+    }
     return "小红书操作"
 }
 
@@ -433,8 +446,8 @@ function BackHome(){
 
 function LookNew(){
     if (FindText("发弹幕")) {
-        for (let i = 0; i < randomNum(10,15); i++) {
-            toast("随机看视频，时间：" + i);
+        for (let i = 0; i < randomNum(45,60); i++) {
+            toast("随机看视频，时间：" + String(i * 2) + "秒");
             sleep(2000);
         }
         for (let i = 0; i < 10; i++) {
@@ -456,6 +469,10 @@ function LookNew(){
         for (let i = 0; i < randomNum(8, 10); i++) {
             RndSwipt()
             sleep(randomNum(1200, 2000));
+        }
+        for (let i = 0; i < randomNum(45,60); i++) {
+            toast("随机看视频，时间：" + + String(i * 2) + "秒");
+            sleep(2000);
         }
         for (let i = 0; i < 10; i++) {
             let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
@@ -513,6 +530,13 @@ function Work(){
     let UIDList2 = []
     let UID = ""
     let kg = readConfigString("sing");
+    let UIDkg = readConfigString("UIDkg");
+
+    if (UIDkg === "true") {
+        Task = "获取UID"
+    } else {
+        if (kg === "true") {Task = "VPN操作"} else {Task = "小红书操作"}
+    }
     logd(Name);
     logd(Name2);
     while (true){
@@ -549,6 +573,8 @@ function Work(){
             if (Task === "随机点赞完") {
                 if (UIDList.length <= 0) {
                     Task = "卸载本软"
+                } else {
+
                 }
                 UID = UIDList[randomNum(0,UIDList.length - 1)]
                 UIDList.remove(UID)
