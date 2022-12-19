@@ -374,6 +374,12 @@ function AJS(USER,PASS){
 
 function RedBook(UID,KG){
     if (FindText("发弹幕")) {
+        let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
+        if (a) {
+            if (a.selected) {
+                return "返回主页";
+            }
+        }
         if (KG === "true") {
             for (let i = 0; i < randomNum(45,60); i++) {
                 toast("随机看视频，时间：" + String(i * 2) + "秒");
@@ -396,6 +402,12 @@ function RedBook(UID,KG){
             }
         }
     } else if (FindText("说点什么...")) {
+        let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
+        if (a) {
+            if (a.selected) {
+                return "返回主页"
+            }
+        }
         if (KG === "true") {
             for (let i = 0; i < randomNum(5, 7); i++) {
                 swipeToPoint(1390, 360, 0, 1000, 1200)
