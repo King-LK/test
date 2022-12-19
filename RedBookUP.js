@@ -372,52 +372,53 @@ function AJS(USER,PASS){
     return "VPN操作"
 }
 
-function RedBook(UID){
+function RedBook(UID,KG){
     if (FindText("发弹幕")) {
-        for (let i = 0; i < randomNum(45,60); i++) {
-            toast("随机看视频，时间：" + String(i * 2) + "秒");
-            sleep(2000);
-        }
-        for (let i = 0; i < 10; i++) {
-            let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
-            if (a) {
-                if (a.selected) {
-                    return "返回主页"
-                } else{
-                    a.clickEx()||a.click()
-                }
+        if (KG === "true") {
+            for (let i = 0; i < randomNum(45,60); i++) {
+                toast("随机看视频，时间：" + String(i * 2) + "秒");
+                sleep(2000);
             }
-            sleep(2000);
-        }
-        for (let i = 0; i < randomNum(45,60); i++) {
-            toast("随机看视频，时间：" + String(i * 2) + "秒");
-            sleep(2000);
+            for (let i = 0; i < 10; i++) {
+                let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
+                if (a) {
+                    if (a.selected) {
+                        return "返回主页"
+                    } else{
+                        a.clickEx()||a.click()
+                    }
+                }
+                sleep(2000);
+            }
+            for (let i = 0; i < randomNum(45,60); i++) {
+                toast("随机看视频，时间：" + String(i * 2) + "秒");
+                sleep(2000);
+            }
         }
     } else if (FindText("说点什么...")) {
-        for (let i = 0; i < randomNum(5, 7); i++) {
-            swipeToPoint(1390, 360, 0, 1000, 1200)
-            sleep(randomNum(1200, 2000));
-        }
-        for (let i = 0; i < randomNum(8, 10); i++) {
-            RndSwipt()
-            sleep(randomNum(1200, 2000));
-        }
-        for (let i = 0; i < 10; i++) {
-            let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
-            if (a) {
-                if (a.selected) {
-                    return "返回主页"
-                } else {
-                    a.clickEx() || a.click()
-                }
+        if (KG === "true") {
+            for (let i = 0; i < randomNum(5, 7); i++) {
+                swipeToPoint(1390, 360, 0, 1000, 1200)
+                sleep(randomNum(1200, 2000));
             }
-            sleep(2000);
+            for (let i = 0; i < randomNum(8, 10); i++) {
+                RndSwipt()
+                sleep(randomNum(1200, 2000));
+            }
+            for (let i = 0; i < 10; i++) {
+                let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
+                if (a) {
+                    if (a.selected) {
+                        return "返回主页"
+                    } else {
+                        a.clickEx() || a.click()
+                    }
+                }
+                sleep(2000);
+            }
         }
     }else if (FindText("首页")) {
-        if (UID !== "") {
-            Jump_XHS_Works(UID)
-        }
-
+        Jump_XHS_Works(UID)
     } else {
         utils.openApp("com.xingin.xhs")
         for (let i = 0; i < randomNum(8,10); i++) {
@@ -532,11 +533,11 @@ function Work(){
     let kg = readConfigString("sing");
     let UIDkg = readConfigString("UIDkg");
 
-    if (UIDkg === "true") {
-        Task = "获取UID"
-    } else {
-        if (kg === "true") {Task = "VPN操作"} else {Task = "小红书操作"}
-    }
+    // if (UIDkg === "true") {
+    //     Task = "获取UID"
+    // } else {
+    //     if (kg === "true") {Task = "VPN操作"} else {Task = "小红书操作"}
+    // }
     logd(Name);
     logd(Name2);
     while (true){
@@ -563,7 +564,7 @@ function Work(){
         } else if (Task === "VPN操作") {
             Task = AJS(USER,PASS)
         } else if (Task === "小红书操作") {
-            Task = RedBook(UID)
+            Task = RedBook(UID, UIDkg)
         } else if (Task === "返回主页") {
             if (BackHome()) {
                 Task = "随机点赞"
