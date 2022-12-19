@@ -574,7 +574,9 @@ function Work(){
     if (UIDkg === "true") {
         toast("UID开关已开启");
         sleep(2000);
-    } else if (kg === "true") {
+    } else {toast("手动模式");}
+    
+    if (kg === "true") {
         toast("开关已开启");
         sleep(2000);
     }
@@ -586,10 +588,12 @@ function Work(){
             if (UIDList) {
                 UID = UIDList[randomNum(0,UIDList.length - 1)]
                 UIDList.remove(UID)
-                if (kg === "true") {
-                    Task = "获取账户"
-                } else if (kg === "false") {
-                    Task = "小红书操作"
+                if (UID) {
+                    if (kg === "true") {
+                        Task = "获取账户"
+                    } else if (kg === "false") {
+                        Task = "小红书操作"
+                    }
                 }
                 toast(UID);
                 sleep(2000);
@@ -612,22 +616,23 @@ function Work(){
         } else if (Task === "随机点赞") {
             Task = LookNew()
             if (Task === "随机点赞完") {
-                if (UIDList.length <= 0) {
-                    Task = "卸载本软"
-                } else {
-                    Task = "返回主页2"
-                }
+
                 UID = UIDList[randomNum(0,UIDList.length - 1)]
                 UIDList.remove(UID)
+                if (UID) {
+                    if (UIDList.length <= 0) {
+                        Task = "重置手机"
+                    } else {
+                        Task = "返回主页2"
+                    }
+                }
             }
         } else if (Task === "返回主页2") {
             if (BackHome()) {
                 Task = "小红书操作"
             }
-        } else if (Task === "卸载本软") {
-            if (ResetPhone()) {
-                Task = "跳出"
-            }
+        } else if (Task === "重置手机") {
+            ResetPhone()
         } else if (Task === "跳出") {
             break;
         }
