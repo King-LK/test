@@ -373,76 +373,85 @@ function AJS(USER,PASS){
 }
 
 function RedBook(UID,KG){
-    if (FindText("发弹幕")) {
-        let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
-        if (a) {
-            if (a.selected) {
-                return "返回主页";
-            }
-        }
-        if (KG === "true") {
-            for (let i = 0; i < randomNum(45,60); i++) {
-                toast("随机看视频，时间：" + String(i * 2) + "秒");
-                sleep(2000);
-            }
-            for (let i = 0; i < 10; i++) {
-                let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
-                if (a) {
-                    if (a.selected) {
-                        return "返回主页";
-                    } else{
-                        a.clickEx()||a.click()
-                    }
+    try {
+        if (FindText("您对小红书的评分如何?")) {
+            back()
+        } else if (FindText("发弹幕")) {
+            let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
+            if (a) {
+                if (a.selected) {
+                    return "返回主页";
                 }
-                sleep(2000);
             }
-            for (let i = 0; i < randomNum(45,60); i++) {
-                toast("随机看视频，时间：" + String(i * 2) + "秒");
-                sleep(2000);
-            }
-        }
-    } else if (FindText("说点什么...")) {
-        let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
-        if (a) {
-            if (a.selected) {
-                return "返回主页"
-            }
-        }
-        if (KG === "true") {
-            for (let i = 0; i < randomNum(5, 7); i++) {
-                swipeToPoint(1390, 360, 0, 1000, 1200)
-                sleep(randomNum(1200, 2000));
-            }
-            for (let i = 0; i < randomNum(8, 10); i++) {
-                RndSwipt()
-                sleep(randomNum(1200, 2000));
-            }
-            for (let i = 0; i < randomNum(45,60); i++) {
-                toast("随机看视频，时间：" + + String(i * 2) + "秒");
-                sleep(2000);
-            }
-            for (let i = 0; i < 10; i++) {
-                let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
-                if (a) {
-                    if (a.selected) {
-                        return "返回主页"
-                    } else {
-                        a.clickEx() || a.click()
-                    }
+            if (KG === "true") {
+                for (let i = 0; i < randomNum(45,60); i++) {
+                    toast("随机看视频，时间：" + String(i * 2) + "秒");
+                    sleep(2000);
                 }
+                for (let i = 0; i < 10; i++) {
+                    let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
+                    if (a) {
+                        if (a.selected) {
+                            return "返回主页";
+                        } else{
+                            a.clickEx()||a.click()
+                        }
+                    }
+                    sleep(2000);
+                }
+                for (let i = 0; i < randomNum(45,60); i++) {
+                    toast("随机看视频，时间：" + String(i * 2) + "秒");
+                    sleep(2000);
+                }
+            }
+        } else if (FindText("说点什么...")) {
+            let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
+            if (a) {
+                if (a.selected) {
+                    return "返回主页"
+                }
+            }
+            if (KG === "true") {
+                for (let i = 0; i < randomNum(5, 7); i++) {
+                    swipeToPoint(1390, 360, 0, 1000, 1200)
+                    sleep(randomNum(1200, 2000));
+                }
+                for (let i = 0; i < randomNum(8, 10); i++) {
+                    RndSwipt()
+                    sleep(randomNum(1200, 2000));
+                }
+                for (let i = 0; i < randomNum(45,60); i++) {
+                    toast("随机看视频，时间：" + + String(i * 2) + "秒");
+                    sleep(2000);
+                }
+                for (let i = 0; i < 10; i++) {
+                    let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
+                    if (a) {
+                        if (a.selected) {
+                            return "返回主页"
+                        } else {
+                            a.clickEx() || a.click()
+                        }
+                    }
+                    sleep(2000);
+                }
+            }
+        }else if (FindText("首页")) {
+            Jump_XHS_Works(UID)
+        } else {
+            utils.openApp("com.xingin.xhs")
+            for (let i = 0; i < randomNum(8,10); i++) {
+                toast("休息时间:" + String(i * 2) + "秒");
                 sleep(2000);
             }
         }
-    }else if (FindText("首页")) {
-        Jump_XHS_Works(UID)
-    } else {
-        utils.openApp("com.xingin.xhs")
-        for (let i = 0; i < randomNum(8,10); i++) {
-            toast("休息时间:" + String(i * 2) + "秒");
-            sleep(2000);
-        }
+        return "小红书操作"
+    }catch (e) {
+        toast(e);
+        sleep(2000);
+        return "小红书操作"
     }
-    return "小红书操作"
+
 }
 
 function Jump_XHS_Works(UID) {
@@ -462,65 +471,74 @@ function BackHome(){
 }
 
 function LookNew(){
-    if (FindText("发弹幕")) {
-        for (let i = 0; i < randomNum(45,60); i++) {
-            toast("随机看视频，时间：" + String(i * 2) + "秒");
-            sleep(2000);
-        }
-        for (let i = 0; i < 10; i++) {
-            let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
-            if (a) {
-                if (a.selected) {
-                    return "随机点赞完"
-                } else{
-                    a.clickEx()||a.click()
+    try{
+        if (FindText("您对小红书的评分如何?")) {
+            back()
+        } else if (FindText("发弹幕")) {
+            for (let i = 0; i < randomNum(45,60); i++) {
+                toast("随机看视频，时间：" + String(i * 2) + "秒");
+                sleep(2000);
+            }
+            for (let i = 0; i < 10; i++) {
+                let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
+                if (a) {
+                    if (a.selected) {
+                        return "随机点赞完"
+                    } else{
+                        a.clickEx()||a.click()
+                    }
+                }
+                sleep(2000);
+            }
+        } else if (FindText("说点什么...")) {
+            for (let i = 0; i < randomNum(5, 7); i++) {
+                swipeToPoint(1390, 360, 0, 1000, 1200)
+                sleep(randomNum(1200, 2000));
+            }
+            for (let i = 0; i < randomNum(8, 10); i++) {
+                RndSwipt()
+                sleep(randomNum(1200, 2000));
+            }
+            for (let i = 0; i < randomNum(45,60); i++) {
+                toast("随机看视频，时间：" + + String(i * 2) + "秒");
+                sleep(2000);
+            }
+            for (let i = 0; i < 10; i++) {
+                let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
+                if (a) {
+                    if (a.selected) {
+                        return "随机点赞完"
+                    } else {
+                        a.clickEx() || a.click()
+                    }
+                }
+                sleep(2000);
+            }
+        } else if (FindText("推荐",true)) {
+            sleep(6000);
+            let a = id("com.xingin.xhs:id/gqb").getNodeInfo(0)
+            let Bool = false;
+            for (let i = 0; i < a.length; i++) {
+                logd(a[i].text);
+                if (a[i].text && a[i].text.indexOf("万") > -1) {
+                    let b = a[i].parent().parent()
+                    if (b && b.clickEx()|| b && b.click()) {
+                        Bool = true;
+                        break;
+                    }
                 }
             }
-            sleep(2000);
-        }
-    } else if (FindText("说点什么...")) {
-        for (let i = 0; i < randomNum(5, 7); i++) {
-            swipeToPoint(1390, 360, 0, 1000, 1200)
-            sleep(randomNum(1200, 2000));
-        }
-        for (let i = 0; i < randomNum(8, 10); i++) {
-            RndSwipt()
-            sleep(randomNum(1200, 2000));
-        }
-        for (let i = 0; i < randomNum(45,60); i++) {
-            toast("随机看视频，时间：" + + String(i * 2) + "秒");
-            sleep(2000);
-        }
-        for (let i = 0; i < 10; i++) {
-            let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
-            if (a) {
-                if (a.selected) {
-                    return "随机点赞完"
-                } else {
-                    a.clickEx() || a.click()
-                }
-            }
-            sleep(2000);
-        }
-    } else if (FindText("推荐",true)) {
-        sleep(6000);
-        let a = id("com.xingin.xhs:id/gqb").getNodeInfo(0)
-        let Bool = false;
-        for (let i = 0; i < a.length; i++) {
-            logd(a[i].text);
-            if (a[i].text && a[i].text.indexOf("万") > -1) {
-                let b = a[i].parent().parent()
-                if (b && b.clickEx()|| b && b.click()) {
-                    Bool = true;
-                    break;
-                }
+            if (Bool === false) {
+                RndSwipt()
             }
         }
-        if (Bool === false) {
-            RndSwipt()
-        }
+        return "随机点赞"
+    }catch (e) {
+        toast(e);
+        sleep(2000);
+        return "随机点赞"
     }
-    return "随机点赞"
+
 }
 
 function UninstallThisSoftware(NameAPP) {
