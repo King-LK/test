@@ -559,11 +559,13 @@ function Work(){
     let kg = readConfigString("sing");
     let UIDkg = readConfigString("UIDkg");
 
-    // if (UIDkg === "true") {
-    //     Task = "获取UID"
-    // } else {
-    //     if (kg === "true") {Task = "VPN操作"} else {Task = "小红书操作"}
-    // }
+    if (UIDkg === "true") {
+        toast("UID开关已开启");
+        sleep(2000);
+    } else if (kg === "true") {
+        toast("开关已开启");
+        sleep(2000);
+    }
     logd(Name);
     logd(Name2);
     while (true){
