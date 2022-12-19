@@ -579,10 +579,14 @@ function Work(){
                 if (UIDList.length <= 0) {
                     Task = "卸载本软"
                 } else {
-
+                    Task = "返回主页2"
                 }
                 UID = UIDList[randomNum(0,UIDList.length - 1)]
                 UIDList.remove(UID)
+            }
+        } else if (Task === "返回主页2") {
+            if (BackHome()) {
+                Task = "小红书操作"
             }
         } else if (Task === "卸载本软") {
             if (UninstallThisSoftware("红薯订单热更")) {
