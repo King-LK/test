@@ -521,23 +521,20 @@ function Work(){
             if (UIDList) {
                 UID = UIDList[randomNum(0,UIDList.length - 1)]
                 UIDList.remove(UID)
-                Task = "获取账户"
+                if (kg === "true") {
+                    Task = "获取账户"
+                } else if (kg === "false") {
+                    Task = "小红书操作"
+                }
                 toast(UID);
                 sleep(2000);
             }
         } else if (Task === "获取账户") {
             UIDList2 = GetUser(Name2)
             if (UIDList2) {
-                if (kg === "true") {
-                    USER = UIDList2.user;
-                    PASS = UIDList2.pwd;
-                    // logd(USER);
-                    // logd(PASS);
-                    Task = "VPN操作"
-                    // Task = "跳出"
-                } else if (kg === "false") {
-                    Task = "小红书操作"
-                }
+                USER = UIDList2.user;
+                PASS = UIDList2.pwd;
+                Task = "VPN操作"
             }
         } else if (Task === "VPN操作") {
             Task = AJS(USER,PASS)
