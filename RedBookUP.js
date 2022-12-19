@@ -405,6 +405,10 @@ function RedBook(UID,KG){
                 RndSwipt()
                 sleep(randomNum(1200, 2000));
             }
+            for (let i = 0; i < randomNum(45,60); i++) {
+                toast("随机看视频，时间：" + + String(i * 2) + "秒");
+                sleep(2000);
+            }
             for (let i = 0; i < 10; i++) {
                 let a = text("说点什么...").getOneNodeInfo(0).nextSiblings()[0].child(0);
                 if (a) {
