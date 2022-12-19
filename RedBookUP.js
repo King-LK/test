@@ -383,7 +383,7 @@ function RedBook(UID,KG){
                 let a = id("com.xingin.xhs:id/likeLayout").getOneNodeInfo(0).child(0);
                 if (a) {
                     if (a.selected) {
-                        return "返回主页"
+                        return "返回主页";
                     } else{
                         a.clickEx()||a.click()
                     }
@@ -490,7 +490,8 @@ function LookNew(){
             }
             sleep(2000);
         }
-    } else if (FindId("com.xingin.xhs:id/gqb")) {
+    } else if (FindText("推荐",true)) {
+        sleep(6000);
         let a = id("com.xingin.xhs:id/gqb").getNodeInfo(0)
         let Bool = false;
         for (let i = 0; i < a.length; i++) {
@@ -523,6 +524,27 @@ function UninstallThisSoftware(NameAPP) {
         }
     }
     return "卸载软件"
+}
+
+function ResetPhone() {
+    if (FindText("清除所有数据", true)) {
+    } else if (FindText("系统 > 重置选项", true)) {
+    } else if (FindText("清除所有数据（恢复出厂设置）", true)) {
+    } else if (FindText("搜索设置", true)) {
+        sleep(2000);
+        let a = text("搜索设置").getOneNodeInfo(0);
+        if (a) {
+            a.inputText("清除所有数据（恢复出厂设置）")
+        }
+    } else if (FindText("设置", true)) {
+    } else if (FindText("重置选项", true)) {
+    } else if (FindText("高级", true)) {
+    } else if (FindText("系统", true)) {
+    } else {
+        utils.openApp("com.android.settings")
+        sleep(3000);
+    }
+    return "重置手机"
 }
 
 function Work(){
@@ -589,7 +611,7 @@ function Work(){
                 Task = "小红书操作"
             }
         } else if (Task === "卸载本软") {
-            if (UninstallThisSoftware("红薯订单热更")) {
+            if (ResetPhone()) {
                 Task = "跳出"
             }
         } else if (Task === "跳出") {
@@ -599,6 +621,6 @@ function Work(){
         sleep(2000);
     }
 }
-
+// ResetPhone()
 Work()
 // main();
