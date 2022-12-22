@@ -604,7 +604,7 @@ function Work(){
         if (Task === "获取UID") {
             UIDList = GetUID(Name)
             if (UIDList) {
-                UID = UIDList[randomNum(0,UIDList.length - 1)]
+                UID = UIDList[0]
                 UIDList.remove(UID)
                 if (UID) {
                     if (kg === "true") {
@@ -635,7 +635,7 @@ function Work(){
             Task = LookNew()
             if (Task === "随机点赞完") {
 
-                UID = UIDList[randomNum(0,UIDList.length - 1)]
+                UID = UIDList[0]
                 UIDList.remove(UID)
                 if (UID) {
                     if (UIDList.length <= 0) {
