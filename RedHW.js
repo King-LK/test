@@ -394,7 +394,7 @@ function RedBook(UID,KG){
                         if (a.selected) {
                             return "返回主页";
                         } else{
-                            a.clickEx()||a.click()
+                            // a.clickEx()||a.click()
                         }
                     }
                     sleep(2000);
@@ -430,7 +430,7 @@ function RedBook(UID,KG){
                         if (a.selected) {
                             return "返回主页"
                         } else {
-                            a.clickEx() || a.click()
+                            // a.clickEx() || a.click()
                         }
                     }
                     sleep(2000);
@@ -648,8 +648,7 @@ function Work(){
             Task = AJS(USER,PASS)
         } else if (Task === "小红书操作") {
             Task = RedBook(UID, UIDkg)
-            // if (TemN === 5 && Task === "返回主页") {
-            if (Task === "返回主页") {
+            if (TemN === 5 && Task === "返回主页") {
                 Task = "返回主页2"
             }
         } else if (Task === "返回主页") {
