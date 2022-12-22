@@ -436,8 +436,11 @@ function RedBook(UID,KG){
                     sleep(2000);
                 }
             }
-        }else if (FindText("首页")) {
-            Jump_XHS_Works(UID)
+        } else if (FindText("收藏",true)) {
+        } else if (FindTextEX("小红书号：",true)) {
+        } else if (FindText("用户",true)) {
+        } else if (FindText("首页")) {
+            Jump_XHS_User(UID)
         } else {
             utils.openApp("com.xingin.xhs")
             for (let i = 0; i < randomNum(8,10); i++) {
@@ -588,12 +591,12 @@ function Work(){
     let UID = ""
     let kg = readConfigString("sing");
     let UIDkg = readConfigString("UIDkg");
-
+    let TemN = 0
     if (UIDkg === "true") {
         toast("UID开关已开启");
         sleep(2000);
     } else {toast("手动模式");}
-    
+
     if (kg === "true") {
         toast("开关已开启");
         sleep(2000);
@@ -613,6 +616,7 @@ function Work(){
                         Task = "小红书操作"
                     }
                 }
+                TemN++
                 toast(UID);
                 sleep(2000);
             }
@@ -627,6 +631,9 @@ function Work(){
             Task = AJS(USER,PASS)
         } else if (Task === "小红书操作") {
             Task = RedBook(UID, UIDkg)
+            if (TemN === 5 && Task === "返回主页") {
+                Task = "返回主页2"
+            }
         } else if (Task === "返回主页") {
             if (BackHome()) {
                 Task = "随机点赞"
@@ -634,19 +641,20 @@ function Work(){
         } else if (Task === "随机点赞") {
             Task = LookNew()
             if (Task === "随机点赞完") {
+                Task = "返回主页2"
+            }
+        } else if (Task === "返回主页2") {
+            if (BackHome()) {
+                TemN++
+                if (UID) {
+                    Task = "小红书操作"
+                }
                 if (UIDList.length <= 0) {
                     Task = "重置手机"
                     continue;
                 }
                 UID = UIDList[0]
                 UIDList.remove(UID)
-                if (UID) {
-                    Task = "返回主页2"
-                }
-            }
-        } else if (Task === "返回主页2") {
-            if (BackHome()) {
-                Task = "小红书操作"
             }
         } else if (Task === "重置手机") {
             ResetPhone()
