@@ -457,9 +457,9 @@ function RedBook(UID,KG){
 
 }
 
-function Jump_XHS_Works(UID) {
+function Jump_XHS_User(UID) {
     let a = {
-        "uri": "xhsdiscover://item/" + UID
+        "uri": "xhsdiscover://search/result?keyword=" + UID
     };
     return utils.openActivity(a)
 }
