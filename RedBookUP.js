@@ -464,6 +464,12 @@ function Jump_XHS_User(UID) {
     };
     return utils.openActivity(a)
 }
+function Jump_XHS_Works(UID) {
+    let a = {
+        "uri": "xhsdiscover://item/" + UID
+    };
+    return utils.openActivity(a)
+}
 
 function BackHome(){
     if (FindText("首页")) {
