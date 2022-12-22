@@ -436,8 +436,11 @@ function RedBook(UID,KG){
                     sleep(2000);
                 }
             }
-        }else if (FindText("首页")) {
-            Jump_XHS_Works(UID)
+        } else if (FindText("收藏",true)) {
+        } else if (FindTextEX("小红书号：",true)) {
+        } else if (FindText("用户",true)) {
+        } else if (FindText("首页")) {
+            Jump_XHS_User(UID)
         } else {
             utils.openApp("com.xingin.xhs")
             for (let i = 0; i < randomNum(8,10); i++) {
@@ -558,18 +561,27 @@ function UninstallThisSoftware(NameAPP) {
 
 function ResetPhone() {
     if (FindText("清除所有数据", true)) {
-    } else if (FindText("系统 > 重置选项", true)) {
-    } else if (FindText("清除所有数据（恢复出厂设置）", true)) {
-    } else if (FindText("搜索设置", true)) {
+    } else if (FindText("备份")) {
+        let a = text("重置手机").getNodeInfo(0);
+        if (a && a[1]) {
+            a[1].clickEx()||a[1].click()
+        }
+    } else if (FindText("重置手机", true)) {
+    } else if (FindText("恢复出厂设置", true)) {
+        let a = text("恢复出厂设置").getNodeInfo(0);
+        if (a && a[1]) {
+            a[1].clickEx()||a[1].click()
+        }
+    } else if (FindText("搜索设置项", true)) {
         sleep(2000);
-        let a = text("搜索设置").getOneNodeInfo(0);
+        let a = text("搜索设置项").getOneNodeInfo(0);
         if (a) {
-            a.inputText("清除所有数据（恢复出厂设置）")
+            a.inputText("恢复出厂设置")
         }
     } else if (FindText("设置", true)) {
     } else if (FindText("重置选项", true)) {
-    } else if (FindText("高级", true)) {
-    } else if (FindText("系统", true)) {
+    } else if (FindText("重置", true)) {
+    } else if (FindText("系统和更新", true)) {
     } else {
         utils.openApp("com.android.settings")
         sleep(3000);
@@ -588,7 +600,7 @@ function Work(){
     let UID = ""
     let kg = readConfigString("sing");
     let UIDkg = readConfigString("UIDkg");
-
+    let TemN = 0
     if (UIDkg === "true") {
         toast("UID开关已开启");
         sleep(2000);
@@ -613,6 +625,7 @@ function Work(){
                         Task = "小红书操作"
                     }
                 }
+                TemN++
                 toast(UID);
                 sleep(2000);
             }
@@ -627,6 +640,9 @@ function Work(){
             Task = AJS(USER,PASS)
         } else if (Task === "小红书操作") {
             Task = RedBook(UID, UIDkg)
+            if (TemN === 5 && Task === "返回主页") {
+                Task = "返回主页2"
+            }
         } else if (Task === "返回主页") {
             if (BackHome()) {
                 Task = "随机点赞"
@@ -634,19 +650,20 @@ function Work(){
         } else if (Task === "随机点赞") {
             Task = LookNew()
             if (Task === "随机点赞完") {
+                Task = "返回主页2"
+            }
+        } else if (Task === "返回主页2") {
+            if (BackHome()) {
+                TemN++
+                if (UID) {
+                    Task = "小红书操作"
+                }
                 if (UIDList.length <= 0) {
                     Task = "重置手机"
                     continue;
                 }
                 UID = UIDList[0]
                 UIDList.remove(UID)
-                if (UID) {
-                    Task = "返回主页2"
-                }
-            }
-        } else if (Task === "返回主页2") {
-            if (BackHome()) {
-                Task = "小红书操作"
             }
         } else if (Task === "重置手机") {
             ResetPhone()
