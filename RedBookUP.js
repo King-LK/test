@@ -489,7 +489,7 @@ function LookNew(){
                     if (a.selected) {
                         return "随机点赞完"
                     } else{
-                        a.clickEx()||a.click()
+                        // a.clickEx()||a.click()
                     }
                 }
                 sleep(2000);
@@ -513,7 +513,7 @@ function LookNew(){
                     if (a.selected) {
                         return "随机点赞完"
                     } else {
-                        a.clickEx() || a.click()
+                        // a.clickEx() || a.click()
                     }
                 }
                 sleep(2000);
@@ -632,8 +632,7 @@ function Work(){
             Task = AJS(USER,PASS)
         } else if (Task === "小红书操作") {
             Task = RedBook(UID, UIDkg)
-            // if (TemN === 5 && Task === "返回主页") {
-            if (Task === "返回主页") {
+            if (TemN === 5 && Task === "返回主页") {
                 Task = "返回主页2"
             }
         } else if (Task === "返回主页") {
