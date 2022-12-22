@@ -634,15 +634,14 @@ function Work(){
         } else if (Task === "随机点赞") {
             Task = LookNew()
             if (Task === "随机点赞完") {
-
+                if (UIDList.length <= 0) {
+                    Task = "重置手机"
+                    continue;
+                }
                 UID = UIDList[0]
                 UIDList.remove(UID)
                 if (UID) {
-                    if (UIDList.length <= 0) {
-                        Task = "重置手机"
-                    } else {
-                        Task = "返回主页2"
-                    }
+                    Task = "返回主页2"
                 }
             }
         } else if (Task === "返回主页2") {
