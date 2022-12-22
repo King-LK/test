@@ -440,7 +440,8 @@ function RedBook(UID,KG){
         } else if (FindTextEX("小红书号：",true)) {
         } else if (FindText("用户",true)) {
         } else if (FindText("首页")) {
-            Jump_XHS_User(UID)
+            // Jump_XHS_User(UID)
+            Jump_XHS_Works(UID)
         } else {
             utils.openApp("com.xingin.xhs")
             for (let i = 0; i < randomNum(8,10); i++) {
@@ -460,6 +461,13 @@ function RedBook(UID,KG){
 function Jump_XHS_User(UID) {
     let a = {
         "uri": "xhsdiscover://search/result?keyword=" + UID
+    };
+    return utils.openActivity(a)
+}
+
+function Jump_XHS_Works(UID) {
+    let a = {
+        "uri": "xhsdiscover://item/" + UID
     };
     return utils.openActivity(a)
 }
@@ -640,7 +648,8 @@ function Work(){
             Task = AJS(USER,PASS)
         } else if (Task === "小红书操作") {
             Task = RedBook(UID, UIDkg)
-            if (TemN === 5 && Task === "返回主页") {
+            // if (TemN === 5 && Task === "返回主页") {
+            if (Task === "返回主页") {
                 Task = "返回主页2"
             }
         } else if (Task === "返回主页") {
